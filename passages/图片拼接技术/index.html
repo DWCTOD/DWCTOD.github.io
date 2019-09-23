@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>图片拼接技术 | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="董沅鑫的小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">AI_study</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 梦想因坚持而伟大</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/DWCTOD/AI_study" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-09-16
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    图片拼接技术
+  </h1>
+  
+  <article class="passage-article">
+    <h1 id="图片拼接技术"><a href="#图片拼接技术" class="headerlink" title="图片拼接技术"></a>图片拼接技术</h1><p><a href="https://towardsdatascience.com/image-panorama-stitching-with-opencv-2402bde6b46c" target="_blank" rel="noopener">https://towardsdatascience.com/image-panorama-stitching-with-opencv-2402bde6b46c</a></p>
+<p>代码：<a href="https://colab.research.google.com/drive/11Md7HWh2ZV6_g3iCYSUw76VNr4HzxcX5" target="_blank" rel="noopener">https://colab.research.google.com/drive/11Md7HWh2ZV6_g3iCYSUw76VNr4HzxcX5</a></p>
+<p>图像拼接是计算机视觉中最成功的应用之一。 如今，很难找到不包含此功能的手机或图像处理API。</p>
+<p>在这篇文章中，我们将讨论如何使用Python和OpenCV执行图像拼接。 鉴于一对共享一些共同区域的图像，我们的目标是“缝合”它们并创建全景图像场景。</p>
+<p>在整篇文章中，我们将介绍一些最着名的计算机视觉技术。 这些包括：</p>
+<ul>
+<li>关键点检测</li>
+<li>局部不变描述符（SIFT，SURF等）</li>
+<li>特征匹配</li>
+<li>使用RANSAC进行的旋转估计（Homography estimation）</li>
+<li>透视畸变（Perspective warping）</li>
+</ul>
+<p>我们探索了许多特征提取算子，如SIFT，SURF，BRISK和ORB。 你可以使用这款Colab笔记本，甚至可以用你的照片试试。</p>
+<blockquote>
+<p>Colab：<a href="https://colab.research.google.com/drive/11Md7HWh2ZV6_g3iCYSUw76VNr4HzxcX5" target="_blank" rel="noopener">https://colab.research.google.com/drive/11Md7HWh2ZV6_g3iCYSUw76VNr4HzxcX5</a></p>
+</blockquote>
+<img src="/home/pzw/DWCTOD/source/_posts/2.png" width="400">
+
+<h3 id="特征检测和提取"><a href="#特征检测和提取" class="headerlink" title="特征检测和提取"></a>特征检测和提取</h3><p>给定一对像上面那样的图像，我们想要把它们拼接起来创建一个全景场景。 值得注意的是，两个图像都需要共享一些共同的区域。</p>
+<p>此外，即使图片<strong>在以下一个或多个方面存在差异</strong>，我们的解决方案也必须强大：</p>
+<ul>
+<li>Scaling</li>
+<li>Angle</li>
+<li>Spacial position</li>
+<li>Capturing devices </li>
+</ul>
+<p>朝这个方向迈出的第一步是提取一些感兴趣的关键点和特征。 但是，这些功能需要具有一些特殊属性。</p>
+<p>我们首先考虑一个简单的解决方案。</p>
+<h3 id="关键点检测"><a href="#关键点检测" class="headerlink" title="关键点检测"></a>关键点检测</h3><p>一开始可能使用简单些的方法，诸如使用Harris Corners之类的算法提取关键点。 然后，我们可以尝试根据欧几里德距离之类的相似度量来匹配相应的关键点。 我们知道，角点（corner）有一个很好的属性：<strong>它们对旋转是不变的。</strong> 这意味着，一旦我们检测到一个角点，如果我们旋转图像，那个角点仍将存在。</p>
+<p>但是，如果我们旋转然后缩放图像怎么办？ 在这种情况下，我们会很难，因为角点不是规模不变的。 也就是说，如果我们放大图像，先前检测到的角可能会变成一条线！</p>
+<p>总之，我们需要对旋转和缩放不变的特征。 这就是SIFT，SURF和ORB等更强大的方法的用武之地。</p>
+<h3 id="关键点和描述子"><a href="#关键点和描述子" class="headerlink" title="关键点和描述子"></a>关键点和描述子</h3><p>像SIFT和SURF这样的方法试图解决角点检测算法的局限性。通常，角点检测器算法使用固定大小的内核来检测图像上的感兴趣区域（角点）。很容易看出，当我们缩放图像时，这个内核可能会变得太小或太大。</p>
+<p>为了解决这个限制，像SIFT这样的方法使用高斯差分（DoD）。我们的想法是在同一图像的不同比例版本上应用DoD。它还使用相邻像素信息来查找和细化关键点和相应的描述子。</p>
+<p>首先，我们需要加载2个图像，查询图片和训练图片。最初，我们首先从两者中提取关键点和描述符。我们可以通过使用OpenCV detectAndCompute（）函数一步完成。请注意，为了使用detectAndCompute（），我们需要一个关键点检测器和描述符对象的实例。它可以是ORB，SIFT或SURF等。另外，在将图像馈送到detectAndCompute（）之前，我们将它们转换为灰度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def detectAndDescribe(image, method=None):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Compute key points and feature descriptors using an specific method</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    </span><br><span class="line">    assert method is not None, &quot;You need to define a feature detection method. Values are: &apos;sift&apos;, &apos;surf&apos;&quot;</span><br><span class="line">    </span><br><span class="line">    # detect and extract features from the image</span><br><span class="line">    if method == &apos;sift&apos;:</span><br><span class="line">        descriptor = cv2.xfeatures2d.SIFT_create()</span><br><span class="line">    elif method == &apos;surf&apos;:</span><br><span class="line">        descriptor = cv2.xfeatures2d.SURF_create()</span><br><span class="line">    elif method == &apos;brisk&apos;:</span><br><span class="line">        descriptor = cv2.BRISK_create()</span><br><span class="line">    elif method == &apos;orb&apos;:</span><br><span class="line">        descriptor = cv2.ORB_create()</span><br><span class="line">        </span><br><span class="line">    # get keypoints and descriptors</span><br><span class="line">    (kps, features) = descriptor.detectAndCompute(image, None)</span><br><span class="line">    </span><br><span class="line">    return (kps, features)</span><br></pre></td></tr></table></figure>
+
+<p>我们对查询和训练的图片都运行detectAndCompute（）。 此时，我们为这两个图像提供了一组关键点和描述子。 如果我们使用SIFT作为特征提取器，它将为每个关键点返回128维特征向量。 如果选择SURF，我们将获得64维特征向量。 以下图像显示了使用SIFT，SURF，BRISK和ORB提取的一些功能。</p>
+<img src="/home/pzw/DWCTOD/source/_posts/3.png" width="400">
+
+
+
+<img src="/home/pzw/DWCTOD/source/_posts/4.png" width="400">
+
+<img src="/home/pzw/DWCTOD/source/_posts/5.png" width="400">
+
+<img src="/home/pzw/DWCTOD/source/_posts/6.png" width="400">
+
+<h3 id="特征匹配"><a href="#特征匹配" class="headerlink" title="特征匹配"></a>特征匹配</h3><p>我们可以看到，我们从两个图像中都有大量的特征。 现在，我们想比较两组特征并以线段相连的形式显示更多相似性的特征点对。</p>
+<p>使用OpenCV，功能匹配需要Matcher对象。 在这里，我们探索两种方法：</p>
+<ul>
+<li>Brute Force Matcher（暴力匹配法）</li>
+<li>KNN（k-最近邻）</li>
+</ul>
+<p>BruteForce（BF）Matcher正如其名称所表明的那样。 给定2组特征（来自图片A和图片B），来自集合A的每个特征与集合B中的所有特征进行比较。默认情况下，BF匹配器计算<strong>两点之间的欧几里德距离</strong>。 因此，对于集合A中的每个特征，它返回集合B中最接近的特征。对于SIFT和SURF，OpenCV建议使用欧几里德距离。 对于其他特征提取器，如ORB和BRISK，建议使用汉明距离。</p>
+<p>要使用OpenCV创建BruteForce Matcher，我们只需要指定2个参数。 第一个是距离度量。 第二个是crossCheck布尔参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def createMatcher(method,crossCheck):</span><br><span class="line">    &quot;Create and return a Matcher Object&quot;</span><br><span class="line">    </span><br><span class="line">    if method == &apos;sift&apos; or method == &apos;surf&apos;:</span><br><span class="line">        bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=crossCheck)</span><br><span class="line">    elif method == &apos;orb&apos; or method == &apos;brisk&apos;:</span><br><span class="line">        bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=crossCheck)</span><br><span class="line">    return bf</span><br></pre></td></tr></table></figure>
+
+<p>crossCheck bool参数指示两个特征是否必须相互匹配才能被视为有效。 换句话说，对于被认为有效的一对特征（f1，f2），f1需要匹配f2，并且f2也必须匹配f1作为最接近的匹配。 此过程可确保更强大的匹配功能集，并在原始SIFT文章中进行了描述。</p>
+<p>但是，对于我们想要考虑多个候选匹配的情况，我们可以使用基于KNN的匹配过程。</p>
+<h2 id="KNN不返回给定特征的单个最佳匹配，而是返回k个最佳匹配。"><a href="#KNN不返回给定特征的单个最佳匹配，而是返回k个最佳匹配。" class="headerlink" title="KNN不返回给定特征的单个最佳匹配，而是返回k个最佳匹配。"></a>KNN不返回给定特征的单个最佳匹配，而是返回k个最佳匹配。</h2><p>注意，k的值必须是由用户预先定义的。如我们预期的那样，KNN提供了一个更的的候选特征集合。但是，我们需要确保所有这些匹配对在进一步发展之前都是健壮的。</p>
+<h3 id="比率测试（Ratio-Testing）"><a href="#比率测试（Ratio-Testing）" class="headerlink" title="比率测试（Ratio Testing）"></a>比率测试（Ratio Testing）</h3><p>为了确保KNN返回的特征具有良好的可比性，SIFT论文的作者提出了一种称为<strong>比率测试（</strong>Ratio Testing）的技术。 基本上，我们迭代KNN返回的每个对并执行距离测试。 对于每对特征（f1，f2），如果f1和f2之间的距离在一定比例内，我们保留它，否则，我们将它丢弃。 此外，必须手动选择比率值。</p>
+<p>从本质上讲，比率测试与BruteForce Matcher的交叉检查选项完成相同的工作。 两者都确保一对检测到的特征确实足够近以至于被认为是相似的。 下面的2个数字显示了BF和KNN Matcher对SIFT特征的结果。 我们选择仅显示100个匹配点以清除可视化。</p>
+<img src="/home/pzw/DWCTOD/source/_posts/7.png" width="400">
+
+<img src="/home/pzw/DWCTOD/source/_posts/8.png" width="400">
+
+<p>[^8]: 在SIFT功能上使用Brute Force Matcher进行特征匹配</p>
+<p>请注意，即使在KNN中交叉验证——暴力匹配（Brute force）和比率测试之后，某些功能也无法正确匹配。</p>
+<p>然而，Matcher算法将为我们提供两个图像中最好的（更相似的）特征集。 现在，我们需要获取这些点并找到基于匹配点将2个图像拼接在一起的变换矩阵。</p>
+<p>这种转换称为Homography matrix（单应性矩阵）。 简而言之，如果Homography是3x3矩阵，可用于许多应用，例如相机姿态估计，透视校正和图像拼接。 如果Homography是2D变换。 它将点从一个平面（图像）映射到另一个平面。 让我们看看我们是如何得到它的。</p>
+<h1 id="Estimating-the-Homography"><a href="#Estimating-the-Homography" class="headerlink" title="Estimating the Homography"></a>Estimating the Homography</h1><p>RANdom SAmple Consensus或RANSAC是一种适合线性模型的迭代算法。与其他线性回归器不同，RANSAC设计为对异常值具有鲁棒性。</p>
+<p>像线性回归这样的模型使用最小二乘估计来使最佳模型适合数据。然而，普通最小二乘法对异常值非常敏感。因此，如果异常值的数量很大，它可能会失败。</p>
+<p>RANSAC通过仅使用数据中的<strong>内部子集</strong>估计参数来解决此问题。下图显示了线性回归和RANSAC之间的比较。首先，请注意数据集包含相当多的异常值。</p>
+<p>我们可以看到线性回归模型很容易受到异常值的影响。那是因为它试图减少平均误差。因此，它倾向于支持最小化从所有数据点到模型本身的总距离的模型。这包括异常值。</p>
+<p>相反，RANSAC仅将模型拟合到被识别为内点的点子集上。</p>
+<p>这个特性对我们的用例非常重要。在这里，我们将使用RANSAC来估计Homography矩阵。事实证明，Homography对我们传递给它的数据质量非常敏感。因此，重要的是有一个算法（RANSAC）可以过滤明显不属于数据分布的点。</p>
+<img src="/home/pzw/DWCTOD/source/_posts/8.png" width="400">
+
+<p>[^8]: 最小二乘与RANSAC模型拟合的比较。 请注意数据中的大量异常值。</p>
+<p>一旦我们得到 estimated Homography，我们需要将其中一个图像变换到一个共同的平面。</p>
+<p>在这里，我们将对其中一个图像应用透视变换。 基本上，透视变换可以组合一个或多个操作，例如旋转，缩放，平移或剪切。 这个想法是转换其中一个图像，使两个图像合并为一个。 为此，我们可以使用OpenCV warpPerspective（）函数。 它采用图像和homography作为输入。 然后，它根据homography将源图像变换到目的平面上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Apply panorama correction</span><br><span class="line">width = trainImg.shape[1] + queryImg.shape[1]</span><br><span class="line">height = trainImg.shape[0] + queryImg.shape[0]</span><br><span class="line"></span><br><span class="line">result = cv2.warpPerspective(trainImg, H, (width, height))</span><br><span class="line">result[0:queryImg.shape[0], 0:queryImg.shape[1]] = queryImg</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(20,10))</span><br><span class="line">plt.imshow(result)</span><br><span class="line"></span><br><span class="line">plt.axis(&apos;off&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>生成的全景图像如下所示。 如我们所见，结果中有几个工件。 更具体地说，我们可以看到与图像边界处的照明条件和边缘效应有关的一些问题。 理想情况下，我们可以执行后处理技术来标准化直方图匹配等强度。 这可能会使结果看起来更加真实。</p>
+<p>谢谢阅读！</p>
+<p><img src="/home/pzw/DWCTOD/source/_posts/10.jpg" width="400"><img src="/home/pzw/DWCTOD/source/_posts/9.jpg" width="400"></p>
+<img src="/home/pzw/DWCTOD/source/_posts/11.jpeg" width="400">
+
+<p>可能存在的报错</p>
+<p>（1）Qt 链接报错 version `Qt_5’ not found]</p>
+<blockquote>
+<p>python3: relocation error: /usr/lib/x86_64-linux-gnu/libQt5XcbQpa.so.5: symbol _ZN20QPlatformIntegration11screenAddedEP15QPlatformScreenb version Qt_5_PRIVATE_API not defined in file libQt5Gui.so.5 with link time reference</p>
+</blockquote>
+<p>解决方案：<a href="https://www.cnblogs.com/sunchaothu/p/9962675.html" target="_blank" rel="noopener">https://www.cnblogs.com/sunchaothu/p/9962675.html</a></p>
+<p>（2）AttributeError: module ‘cv2.cv2’ has no attribute ‘xfeatures2d’</p>
+<p>需要回退版本到3.4.2.16，记得要先卸载之前安装好的opencv-python</p>
+<p>解决方案：<a href="https://blog.csdn.net/weixin_43167047/article/details/82841750" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43167047/article/details/82841750</a></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#图片拼接技术"><span class="toc-text">图片拼接技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征检测和提取"><span class="toc-text">特征检测和提取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键点检测"><span class="toc-text">关键点检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键点和描述子"><span class="toc-text">关键点和描述子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特征匹配"><span class="toc-text">特征匹配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KNN不返回给定特征的单个最佳匹配，而是返回k个最佳匹配。"><span class="toc-text">KNN不返回给定特征的单个最佳匹配，而是返回k个最佳匹配。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#比率测试（Ratio-Testing）"><span class="toc-text">比率测试（Ratio Testing）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Estimating-the-Homography"><span class="toc-text">Estimating the Homography</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: 董沅鑫</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">http://yoursite.com/passages/图片拼接技术/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">博客推荐</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">系列教程</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://godbmw.com/categories/webpack4%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B/" target="_blank">webpack4系列教程</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://godbmw.com/design-patterns/" target="_blank">设计模式手册</a>
+            </span>
+          
+        </div>
+      
+        <div class="site-footer-col">
+          <h5 class="site-footer-title">抓到我</h5>
+          
+            <span class="site-footer-item">
+              <a href="https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5" target="_blank">掘金</a>
+            </span>
+          
+            <span class="site-footer-item">
+              <a href="https://segmentfault.com/" target="_blank">思否</a>
+            </span>
+          
+        </div>
+      
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: yuanxin.me@gmail.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+        <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+          
+            <div>
+              <img src="/images/wechat.png" alt="WeChat">
+              
+                <p>WeChat</p>
+              
+            </div>
+          
+            <div>
+              <img src="/images/alipay.png" alt="AliPay">
+              
+                <p>AliPay</p>
+              
+            </div>
+          
+        </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/我会创建客人博客啦～/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+      <a href="javascript:void(0);" id="site-reward">
+        <i class="fa fa-thumbs-up"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>
