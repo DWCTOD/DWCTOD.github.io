@@ -32,13 +32,15 @@
   
 
   
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
 
   <script>
   // theme-ad's config script
   // it can be used in every script
   
   window.AD_CONFIG = {
-    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":true,"count":true},
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":true,"count":false},
     welcome: {"enable":false,"interval":30},
     start_time: "2019-09-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
@@ -215,10 +217,6 @@
       <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
     </div>
     
-      <div class="site-footer-info">
-        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
-      </div>
-    
     
       <div class="site-footer-info">
         <i class="fa fa-at"></i> Email: 534155562@qq.com
@@ -232,6 +230,18 @@
     </div>
   </footer>
 </div>
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
     <div id="site-layer" style="display:none;">
   <div class="site-layer-content">
     <div class="site-layer-header">
