@@ -27,14 +27,18 @@ var _hmt = _hmt || [];
 
 
 
+<meta name="description" content="最近自己用hexo+github搭建了一个个人网站：https://dwctod.github.io/ 但是出现了一些问题，比如这里github图标无法显示了 按照网友的提示：https://blog.csdn.net/youshaoduo/article/details/84824828 他的思路： （1）从这里下载图片，并将图片存放在YourBolgPath/themes/yelee/sour">
+<meta name="keywords" content="踩坑总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo Yelee主题侧边栏社交图标中的github图标不显示">
 <meta property="og:url" content="http://yoursite.com/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近自己用hexo+github搭建了一个个人网站：https://dwctod.github.io/ 但是出现了一些问题，比如这里github图标无法显示了 按照网友的提示：https://blog.csdn.net/youshaoduo/article/details/84824828 他的思路： （1）从这里下载图片，并将图片存放在YourBolgPath/themes/yelee/sour">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-27T06:47:11.626Z">
+<meta property="og:updated_time" content="2019-09-27T07:01:09.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo Yelee主题侧边栏社交图标中的github图标不显示">
+<meta name="twitter:description" content="最近自己用hexo+github搭建了一个个人网站：https://dwctod.github.io/ 但是出现了一些问题，比如这里github图标无法显示了 按照网友的提示：https://blog.csdn.net/youshaoduo/article/details/84824828 他的思路： （1）从这里下载图片，并将图片存放在YourBolgPath/themes/yelee/sour">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -195,7 +199,7 @@ var _hmt = _hmt || [];
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
                     </div>
                 </section>
                 
@@ -301,6 +305,10 @@ var _hmt = _hmt || [];
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -308,7 +316,27 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>最近自己用hexo+github搭建了一个个人网站：<a href="https://dwctod.github.io/" target="_blank" rel="noopener">https://dwctod.github.io/</a></p>
+<p>但是出现了一些问题，比如这里github图标无法显示了</p>
+<p>按照网友的提示：<a href="https://blog.csdn.net/youshaoduo/article/details/84824828" target="_blank" rel="noopener">https://blog.csdn.net/youshaoduo/article/details/84824828</a></p>
+<p>他的思路：</p>
+<p>（1）从<a href="http://www.iconfont.cn/search/index?searchType=icon&q=github" target="_blank" rel="noopener">这里下载图片</a>，并将图片存放在YourBolgPath/themes/yelee/source/img/下</p>
+<p>（2）修改YourBolgPath/themes/yelee/source/css/_partial/customise/social-icon.styl的img-logo中加入GitHub black 75（GitHub是图片名，black是背景色，75是透明度，自己看着改吧）</p>
+<p>（3）删除下面代码块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.GitHub</span><br><span class="line">    background url(//cdn.bootcss.com/logos/0.2.0/github-octocat.svg) no-repeat white</span><br><span class="line">    background-size 90%</span><br><span class="line">    background-position 50% 100%</span><br></pre></td></tr></table></figure>
+
+<p>存在的问题：</p>
+<p>（1）无效，同时GitHub black 75（这里75并不是透明度，而是显示的比例）</p>
+<p>（2）我对YourBolgPath/themes/yelee/source/img/底下的图片进行操作，例如将“知乎”.png的图片删除，仍然能正常显示，因此显然内部的原理并不是这样子的。</p>
+<p>但是，我还是想到办法解决了，因为正如原作者所说的，github的图片消失了，所以无法显示，因此我在<a href="http://www.iconfont.cn/search/index?searchType=icon&q=github" target="_blank" rel="noopener">这里下载图片</a>，然后将下载好的图片上传到图床上【这里使用七牛】，然后生成外链，替换掉上面的代码块中url后面的即可。</p>
+<p>因此我已经将图片上传到图床，理论上，大家只要将这部分修改成下面即可</p>
+<p>（1）找到YourBolgPath/themes/yelee/source/css/_partial/customise/social-icon.styl，打开</p>
+<p>（2）修改和替换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.GitHub</span><br><span class="line">    background url(http://pye1oyyud.bkt.clouddn.com/Github1.png) no-repeat white</span><br><span class="line">    background-size 80%</span><br><span class="line">    background-position 50% 100%</span><br></pre></td></tr></table></figure>
+
+<p>备注：url括号中的内容进行修改哦</p>
+<p>最终效果可以到我的网站查看哦，欢迎留言和交流～<a href="https://dwctod.github.io/" target="_blank" rel="noopener">https://dwctod.github.io/</a></p>
+
       
     </div>
     
@@ -319,7 +347,7 @@ var _hmt = _hmt || [];
         <p><span>Title:</span><a href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/">Hexo Yelee主题侧边栏社交图标中的github图标不显示</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
         <p><span>Created:</span>2019-09-27, 14:47:11</p>
-        <p><span>Updated:</span>2019-09-27, 14:47:11</p>
+        <p><span>Updated:</span>2019-09-27, 15:01:09</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/" title="Hexo Yelee主题侧边栏社交图标中的github图标不显示">http://yoursite.com/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/</a>
             <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
