@@ -307,26 +307,9 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><a href="https://zhuanlan.zhihu.com/p/38739563" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38739563</a></p>
+              <p><a href="https://zhuanlan.zhihu.com/p/38739563" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38739563</a></p>
 <p>轮廓检测是一个比较重要的任务，通过检测图片或视频帧中的物体的轮廓，结合其他操作可以实现很多任务需求。例如通过检测出物体的轮廓，进而计算面积，计算周长等等。</p>
-<div align="center"><img src="https://pic4.zhimg.com/v2-2a34f4ed2aa4bd8d2b7a8d10e868f715_1200x500.jpg" width="400"></div>
-
-<p>图片处理效果预览↑（就是封面图片），从左到右依次是：</p>
-<ol>
-<li>原图</li>
-<li>阈值图（第一行）、Canny边缘提取（第二行）</li>
-<li>蓝色矩形、绿色最小矩形、红色最小圆形</li>
-<li>蓝色等高线轮廓、绿色贴合轮廓、红色包围轮廓</li>
-</ol>
-<p>核心代码预览：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">thresh, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line">approx = cv2.approxPolyDP(cnt, epsilon, True)</span><br><span class="line">hull = cv2.convexHull(cnt)</span><br><span class="line"></span><br><span class="line">x, y, w, h = cv2.boundingRect(cnt)</span><br><span class="line">min_rect = cv2.minAreaRect(cnt)</span><br><span class="line">(x, y), radius = cv2.minEnclosingCircle(cnt)</span><br></pre></td></tr></table></figure>
-
-<p>方案：</p>
-<p>（1）读入图片，并转为灰度图</p>
-<p>（2）进行二值化处理</p>
-<p>（3）膨胀处理</p>
-<p><strong><div align="center"> <font face="“微软黑体”" color="blue" size="16">更多优质内容请关注：</font></div></strong></p>
-<div align="center"><img src="http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg" align="right"></div>
+          
       
     </div>
     
@@ -339,6 +322,10 @@ var _hmt = _hmt || [];
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/passages/轮廓形状检测/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
