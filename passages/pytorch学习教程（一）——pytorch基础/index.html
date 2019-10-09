@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="AI_study">
+
+
+
+<meta name="description" content="本文介绍了pytorch相关操作的基础知识，例如自动求导例子，如何从numpy中导入数据，如何使用pytorch输入数据集，如何自己创建数据集，如何加载预训练模型，如何保存和加载模型。">
+<meta name="keywords" content="pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch学习教程（一）——pytorch基础">
+<meta property="og:url" content="http://yoursite.com/passages/pytorch学习教程（一）——pytorch基础/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文介绍了pytorch相关操作的基础知识，例如自动求导例子，如何从numpy中导入数据，如何使用pytorch输入数据集，如何自己创建数据集，如何加载预训练模型，如何保存和加载模型。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-09T07:32:35.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pytorch学习教程（一）——pytorch基础">
+<meta name="twitter:description" content="本文介绍了pytorch相关操作的基础知识，例如自动求导例子，如何从numpy中导入数据，如何使用pytorch输入数据集，如何自己创建数据集，如何加载预训练模型，如何保存和加载模型。">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>pytorch学习教程（一）——pytorch基础 | Hexo</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">AI_study</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/534155562@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DWCTOD" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/wu-dong-37-11/activities" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wo/">wo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">保持客观，不轻易下结论～</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">AI_study</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">AI_study</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/534155562@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DWCTOD" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/wu-dong-37-11/activities" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-pytorch学习教程（一）——pytorch基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/passages/pytorch学习教程（一）——pytorch基础/" class="article-date">
+      <time datetime="2019-10-09T07:26:30.000Z" itemprop="datePublished">2019-10-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      pytorch学习教程（一）——pytorch基础
+    </h1>
+  
+
+	
+	
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/">pytorch</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本文介绍了pytorch相关操作的基础知识，例如自动求导例子，如何从numpy中导入数据，如何使用pytorch输入数据集，如何自己创建数据集，如何加载预训练模型，如何保存和加载模型。</p>
+<a id="more"></a>
+
+<h2 id="pytorch基础"><a href="#pytorch基础" class="headerlink" title="pytorch基础"></a>pytorch基础</h2><h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><p>1.基础自动求导例子1</p>
+<p>2.基础自动求导例子2</p>
+<p>3.从numpy中导入数据</p>
+<p>4.Input pipline（提供数据）</p>
+<p>5.Input pipline for custom dataset</p>
+<p>6.预训练模型</p>
+<p>7.保存和导入模型</p>
+<h3 id="1-基础自动求导例子1"><a href="#1-基础自动求导例子1" class="headerlink" title="1. 基础自动求导例子1"></a>1. 基础自动求导例子1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 创建张量</span><br><span class="line">x = torch.tensor(1., requires_grad=True)</span><br><span class="line">y = torch.tensor(2., requires_grad=True)</span><br><span class="line">b = torch.tensor(3., requires_grad=True)</span><br><span class="line"></span><br><span class="line"># 创建计算图</span><br><span class="line">y = w * x + b # y = 2 * x + 3</span><br><span class="line"></span><br><span class="line"># 计算梯度</span><br><span class="line">y.backward()</span><br><span class="line"></span><br><span class="line"># 打印梯度</span><br><span class="line">print(x.grad) # x.grad = 2</span><br><span class="line">print(w.grad) # w.grad = 1</span><br><span class="line">print(b.grad) # b.grad = 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-基础自动求导例子2"><a href="#2-基础自动求导例子2" class="headerlink" title="2. 基础自动求导例子2"></a>2. 基础自动求导例子2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 创建形状为（10， 3）和（10， 2）的张量</span><br><span class="line">x = torch.randn(10, 3)</span><br><span class="line">y = torch.randn(10, 2)</span><br><span class="line"></span><br><span class="line"># 搭建一个全连接层</span><br><span class="line">linear = nn.Linear(3, 2)</span><br><span class="line">print(&apos;w: &apos;, linear.weight)</span><br><span class="line">print(&apos;b: &apos;, linear.bias)</span><br><span class="line"></span><br><span class="line"># 构建loss函数和优化器</span><br><span class="line">criterion = nn.MESLoss()</span><br><span class="line">optimizer = torch.optim.SGD(linear.paramters(), lr=0.01)</span><br><span class="line"></span><br><span class="line"># 前向传播</span><br><span class="line">pred = linear(x)</span><br><span class="line"></span><br><span class="line"># 计算loss</span><br><span class="line">loss = criterion(pred, y)</span><br><span class="line">print(&apos;loss: &apos;, loss.item())</span><br><span class="line"></span><br><span class="line"># 反向传播</span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line"># 打印梯度</span><br><span class="line">print(&apos;dL/dw: &apos;, linear.weight.grad)</span><br><span class="line">print(&apos;dL/db: &apos;, linear.bias.grad)</span><br><span class="line"></span><br><span class="line"># 一阶梯度下降</span><br><span class="line">optimizer.step()</span><br><span class="line"></span><br><span class="line"># You can also perform gradient descent at the low level.</span><br><span class="line"># linear.weight.data.sub_(0.01 * linear.weight.grad.data)</span><br><span class="line"># linear.bias.data.sub_(0.01 * linear.bias.grad.data)</span><br><span class="line"></span><br><span class="line"># 输出loss在一阶梯度下降后的结果</span><br><span class="line">pred = linear(x)</span><br><span class="line">loss = criterion(pred, y)</span><br><span class="line">print(&apos;loss after 1 step optimization: &apos;, loss.item())</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-从numpy中导入数据"><a href="#3-从numpy中导入数据" class="headerlink" title="3. 从numpy中导入数据"></a>3. 从numpy中导入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建numpy数组</span><br><span class="line">x = np.array([1, 2], [3, 4])</span><br><span class="line"></span><br><span class="line"># 将numpy数组转换为torch张量</span><br><span class="line">y = torch.from_numpy(x)</span><br><span class="line"></span><br><span class="line"># 将torch张量转换为numpy数组</span><br><span class="line">z = y.numpy()</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Input-pipline（提供数据）"><a href="#4-Input-pipline（提供数据）" class="headerlink" title="4. Input pipline（提供数据）"></a>4. Input pipline（提供数据）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 下载并构建CIFAR-10 数据集</span><br><span class="line">train_dataset = torchvision.datasets.CIFAR10(root=&apos;../../data/&apos;,</span><br><span class="line">                                             train=True,</span><br><span class="line">                                             transform=transforms.ToTensor(),</span><br><span class="line">                                             download=True)</span><br><span class="line"></span><br><span class="line"># 提取一对数据（从磁盘读取数据）</span><br><span class="line">image, label = train_dataset[0]</span><br><span class="line">print(image.size())</span><br><span class="line">print(label)</span><br><span class="line"></span><br><span class="line"># 数据加载器data loader——这以非常简单的方式提供队列和线程</span><br><span class="line">train_loader = torch.utils.data.DataLoader(dataset=train_dataset,</span><br><span class="line">                                          batch_size=64,</span><br><span class="line">                                          shuffle=True)</span><br><span class="line"># 当迭代开始，队列和线程开始从文件中导入数据</span><br><span class="line">data_iter = iter(train_loader)</span><br><span class="line"></span><br><span class="line"># mini-batch 图片和label</span><br><span class="line">images, labels = data_iter.next()</span><br><span class="line"></span><br><span class="line"># 数据加载器的实际使用情况如下。</span><br><span class="line">for images, labels in train_loader:</span><br><span class="line">    # 训练的代码应该写在这里</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Input-pipline-for-custom-dataset"><a href="#5-Input-pipline-for-custom-dataset" class="headerlink" title="5. Input pipline for custom dataset"></a>5. Input pipline for custom dataset</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 你应该按照下面的方式建立自定义的数据集</span><br><span class="line">class CustomDataset(torch.utils.data.Dataset):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        # TODO</span><br><span class="line">        # 1. 初始化文件路径或一系列文件名</span><br><span class="line">        pass</span><br><span class="line">    def __getitem__(self, index):</span><br><span class="line">        # TODO</span><br><span class="line">        # 1. 从文件中读取一个数据（例如，使用numpy.fromfile, PIL.Image.open）</span><br><span class="line">        # 2. 数据预处理（例如，torchvision.Transform）</span><br><span class="line">        # 3. 返回数据对（例如，image 和 label）</span><br><span class="line">        pass</span><br><span class="line">    def __len__(self):</span><br><span class="line">        # 你应该将数据集的大小变为0</span><br><span class="line">        return 0</span><br><span class="line"></span><br><span class="line"># 然后你就可以使用预先构建的数据加载器 </span><br><span class="line">custom_dataset = CustomDataset()</span><br><span class="line">train_loader = torch.utils.data.DataLoader(dataset=custom_dataset,</span><br><span class="line">                                          batch_size=64,</span><br><span class="line">                                          shuffle=True)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-预训练模型"><a href="#6-预训练模型" class="headerlink" title="6. 预训练模型"></a>6. 预训练模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 下载和导入ResNet-18的预训练模型</span><br><span class="line">resnet = torchvision.models.resnet18(pretrained=True)</span><br><span class="line"></span><br><span class="line"># 如果你只想微调模型的top 层，可以安装如下方式设置：</span><br><span class="line">for param in resnet.paramters():</span><br><span class="line">    param.requires_grad = False</span><br><span class="line">    </span><br><span class="line"># 替换top层用于微调</span><br><span class="line">resnet.fc = nn.Linear(resnet.fc.in_features, 100) # 100只是一个例子</span><br><span class="line"></span><br><span class="line"># 前向传播</span><br><span class="line">images = torch.randn(64, 3, 224, 224)</span><br><span class="line">outputs = resnet(images)</span><br><span class="line">print(outputs.size()) # (64, 100)</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-保存和导入模型"><a href="#7-保存和导入模型" class="headerlink" title="7. 保存和导入模型"></a>7. 保存和导入模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 保存和导入完整模型</span><br><span class="line">torch.save(resnet, &apos;model.ckpt&apos;)</span><br><span class="line">model = torch.load(&apos;model.ckpt&apos;)</span><br><span class="line"></span><br><span class="line"># 仅保存和导入模型参数（推荐）</span><br><span class="line">torch.save(resnet.state_dict(), &apos;params.ckpt&apos;)</span><br><span class="line">resnet.load_state_dict(torch.load(&apos;params.ckpt&apos;))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/passages/pytorch学习教程（一）——pytorch基础/">pytorch学习教程（一）——pytorch基础</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
+        <p><span>Created:</span>2019-10-09, 15:26:30</p>
+        <p><span>Updated:</span>2019-10-09, 15:32:35</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/passages/pytorch学习教程（一）——pytorch基础/" title="pytorch学习教程（一）——pytorch基础">http://yoursite.com/passages/pytorch学习教程（一）——pytorch基础/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/pytorch学习教程（一）——pytorch基础/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/passages/opencv资源汇总/">
+                    opencv资源汇总
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pytorch基础"><span class="toc-number">1.</span> <span class="toc-text">pytorch基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基础自动求导例子1"><span class="toc-number">1.2.</span> <span class="toc-text">1. 基础自动求导例子1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基础自动求导例子2"><span class="toc-number">1.3.</span> <span class="toc-text">2. 基础自动求导例子2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-从numpy中导入数据"><span class="toc-number">1.4.</span> <span class="toc-text">3. 从numpy中导入数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Input-pipline（提供数据）"><span class="toc-number">1.5.</span> <span class="toc-text">4. Input pipline（提供数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Input-pipline-for-custom-dataset"><span class="toc-number">1.6.</span> <span class="toc-text">5. Input pipline for custom dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-预训练模型"><span class="toc-number">1.7.</span> <span class="toc-text">6. 预训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-保存和导入模型"><span class="toc-number">1.8.</span> <span class="toc-text">7. 保存和导入模型</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"pytorch学习教程（一）——pytorch基础　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="livere" id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjgxNC8yMzMxNQ==">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/passages/opencv资源汇总/" title="Next: opencv资源汇总">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（一）——pytorch基础/">pytorch学习教程（一）——pytorch基础</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/opencv资源汇总/">opencv资源汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/深度学习用于异常检测/">深度学习用于异常检测</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/轮廓形状检测/">边缘检测，框出物体的轮廓（使用opencv-python）</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/不同色彩空间的转换/">不同色彩空间的转换</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/">Hexo Yelee主题侧边栏社交图标中的github图标不显示</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/30-helpful-python-snippets/">30个极简python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/image_stitch/">图片拼接技术</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+	  
+	id: "post-pytorch学习教程（一）——pytorch基础",
+        blogId:'15322-1569306303362-701',
+        name: 'AI算法与图像处理',
+        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 AI_study
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+<script type="text/javascript" src="/js/love.js"></script>
+
+</script>
+
+</script>
+<script type="text/javascript" src="/js/click.js">
+</script>
+
+
+	
+  </div>
+</body>
+</html>
