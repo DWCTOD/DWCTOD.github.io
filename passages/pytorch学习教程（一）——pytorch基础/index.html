@@ -35,7 +35,7 @@ var _hmt = _hmt || [];
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="本文介绍了pytorch相关操作的基础知识，例如自动求导例子，如何从numpy中导入数据，如何使用pytorch输入数据集，如何自己创建数据集，如何加载预训练模型，如何保存和加载模型。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-09T07:34:53.658Z">
+<meta property="og:updated_time" content="2019-10-09T07:38:15.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pytorch学习教程（一）——pytorch基础">
 <meta name="twitter:description" content="本文介绍了pytorch相关操作的基础知识，例如自动求导例子，如何从numpy中导入数据，如何使用pytorch输入数据集，如何自己创建数据集，如何加载预训练模型，如何保存和加载模型。">
@@ -342,8 +342,9 @@ var _hmt = _hmt || [];
 
 <h3 id="6-预训练模型"><a href="#6-预训练模型" class="headerlink" title="6. 预训练模型"></a>6. 预训练模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 下载和导入ResNet-18的预训练模型</span><br><span class="line">resnet = torchvision.models.resnet18(pretrained=True)</span><br><span class="line"></span><br><span class="line"># 如果你只想微调模型的top 层，可以安装如下方式设置：</span><br><span class="line">for param in resnet.paramters():</span><br><span class="line">    param.requires_grad = False</span><br><span class="line">    </span><br><span class="line"># 替换top层用于微调</span><br><span class="line">resnet.fc = nn.Linear(resnet.fc.in_features, 100) # 100只是一个例子</span><br><span class="line"></span><br><span class="line"># 前向传播</span><br><span class="line">images = torch.randn(64, 3, 224, 224)</span><br><span class="line">outputs = resnet(images)</span><br><span class="line">print(outputs.size()) # (64, 100)</span><br></pre></td></tr></table></figure>
 
-<h3 id="7-保存和导入模型"><a href="#7-保存和导入模型" class="headerlink" title="7. 保存和导入模型"></a>7. 保存和导入模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 保存和导入完整模型</span><br><span class="line">torch.save(resnet, &apos;model.ckpt&apos;)</span><br><span class="line">model = torch.load(&apos;model.ckpt&apos;)</span><br><span class="line"></span><br><span class="line"># 仅保存和导入模型参数（推荐）</span><br><span class="line">torch.save(resnet.state_dict(), &apos;params.ckpt&apos;)</span><br><span class="line">resnet.load_state_dict(torch.load(&apos;params.ckpt&apos;))</span><br></pre></td></tr></table></figure>
+<h3 id="7-保存和导入模型"><a href="#7-保存和导入模型" class="headerlink" title="7. 保存和导入模型"></a>7. 保存和导入模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 保存和导入完整模型</span><br><span class="line">torch.save(resnet, &apos;model.ckpt&apos;)</span><br><span class="line">model = torch.load(&apos;model.ckpt&apos;)</span><br><span class="line"></span><br><span class="line"># 仅保存和导入模型参数（推荐）</span><br><span class="line">torch.save(resnet.state_dict(), &apos;params.ckpt&apos;)</span><br><span class="line">resnet.load_state_dict(torch.load(&apos;params.ckpt&apos;)</span><br></pre></td></tr></table></figure>
 
+<p>原文链接：<a href="https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials/01-basics/pytorch_basics/main.py" target="_blank" rel="noopener">https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials/01-basics/pytorch_basics/main.py</a></p>
 
       
     </div>
@@ -355,7 +356,7 @@ var _hmt = _hmt || [];
         <p><span>Title:</span><a href="/passages/pytorch学习教程（一）——pytorch基础/">pytorch学习教程（一）——pytorch基础</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
         <p><span>Created:</span>2019-10-09, 15:26:30</p>
-        <p><span>Updated:</span>2019-10-09, 15:34:53</p>
+        <p><span>Updated:</span>2019-10-09, 15:38:15</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/passages/pytorch学习教程（一）——pytorch基础/" title="pytorch学习教程（一）——pytorch基础">http://yoursite.com/passages/pytorch学习教程（一）——pytorch基础/</a>
             <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/pytorch学习教程（一）——pytorch基础/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
@@ -369,6 +370,12 @@ var _hmt = _hmt || [];
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/passages/pytorch学习教程（二）——线性回归/">
+                    pytorch学习教程（二）——线性回归
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -464,7 +471,9 @@ var _hmt = _hmt || [];
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+            <a href="/passages/pytorch学习教程（二）——线性回归/" title="Pre: pytorch学习教程（二）——线性回归">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -476,7 +485,7 @@ var _hmt = _hmt || [];
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（一）——pytorch基础/">pytorch学习教程（一）——pytorch基础</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/opencv资源汇总/">opencv资源汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/深度学习用于异常检测/">深度学习用于异常检测</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/轮廓形状检测/">边缘检测，框出物体的轮廓（使用opencv-python）</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/不同色彩空间的转换/">不同色彩空间的转换</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/">Hexo Yelee主题侧边栏社交图标中的github图标不显示</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/30-helpful-python-snippets/">30个极简python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/image_stitch/">图片拼接技术</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（二）——线性回归/">pytorch学习教程（二）——线性回归</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（一）——pytorch基础/">pytorch学习教程（一）——pytorch基础</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/opencv资源汇总/">opencv资源汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/深度学习用于异常检测/">深度学习用于异常检测</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/轮廓形状检测/">边缘检测，框出物体的轮廓（使用opencv-python）</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/不同色彩空间的转换/">不同色彩空间的转换</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/">Hexo Yelee主题侧边栏社交图标中的github图标不显示</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/30-helpful-python-snippets/">30个极简python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/image_stitch/">图片拼接技术</a></li></ul>
 
 
 
