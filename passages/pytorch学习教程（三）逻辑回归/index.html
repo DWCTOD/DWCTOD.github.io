@@ -27,20 +27,18 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="本文介绍了如何使用pytorch实现线性回归，包括生成数据集，建立线性回归模型，loss和优化器设置，训练模型，并绘制图以及保存模型。">
+<meta name="description" content="本文介绍了如何使用pytorch实现逻辑回归，这里采用MNIST数据集实现，可以对比逻辑回归和线性回归的区别">
 <meta name="keywords" content="pytorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pytorch学习教程（二）——线性回归">
-<meta property="og:url" content="http://yoursite.com/passages/pytorch学习教程（二）——线性回归/index.html">
+<meta property="og:title" content="pytorch学习教程（三）逻辑回归">
+<meta property="og:url" content="http://yoursite.com/passages/pytorch学习教程（三）逻辑回归/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本文介绍了如何使用pytorch实现线性回归，包括生成数据集，建立线性回归模型，loss和优化器设置，训练模型，并绘制图以及保存模型。">
+<meta property="og:description" content="本文介绍了如何使用pytorch实现逻辑回归，这里采用MNIST数据集实现，可以对比逻辑回归和线性回归的区别">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://pye1oyyud.bkt.clouddn.com/Figure_1.png">
-<meta property="og:updated_time" content="2019-10-12T06:41:14.220Z">
+<meta property="og:updated_time" content="2019-10-12T09:46:59.794Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pytorch学习教程（二）——线性回归">
-<meta name="twitter:description" content="本文介绍了如何使用pytorch实现线性回归，包括生成数据集，建立线性回归模型，loss和优化器设置，训练模型，并绘制图以及保存模型。">
-<meta name="twitter:image" content="http://pye1oyyud.bkt.clouddn.com/Figure_1.png">
+<meta name="twitter:title" content="pytorch学习教程（三）逻辑回归">
+<meta name="twitter:description" content="本文介绍了如何使用pytorch实现逻辑回归，这里采用MNIST数据集实现，可以对比逻辑回归和线性回归的区别">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -72,7 +70,7 @@ var _hmt = _hmt || [];
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>pytorch学习教程（二）——线性回归 | Hexo</title>
+<title>pytorch学习教程（三）逻辑回归 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -276,11 +274,11 @@ var _hmt = _hmt || [];
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-pytorch学习教程（二）——线性回归" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-pytorch学习教程（三）逻辑回归" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/passages/pytorch学习教程（二）——线性回归/" class="article-date">
-      <time datetime="2019-10-12T03:40:37.000Z" itemprop="datePublished">2019-10-12</time>
+      <a href="/passages/pytorch学习教程（三）逻辑回归/" class="article-date">
+      <time datetime="2019-10-12T06:43:44.000Z" itemprop="datePublished">2019-10-12</time>
 </a>
 
 
@@ -295,7 +293,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      pytorch学习教程（二）——线性回归
+      pytorch学习教程（三）逻辑回归
     </h1>
   
 
@@ -322,40 +320,33 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>本文介绍了如何使用pytorch实现线性回归，包括生成数据集，建立线性回归模型，loss和优化器设置，训练模型，并绘制图以及保存模型。</p>
+        <p>本文介绍了如何使用pytorch实现逻辑回归，这里采用MNIST数据集实现，可以对比逻辑回归和线性回归的区别</p>
 <a id="more"></a>
 
-<p>线性回归是利用数理统计中回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法，运用十分广泛，其表达形式为y = kx+b。</p>
-<p>基本步骤：</p>
-<p>（1）导入数据</p>
-<p>（2）构建模型</p>
-<p>（3）训练模型</p>
-<p>（4）绘制图并保存模型</p>
+<p>步骤：</p>
 <p>导入必要的包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torchvision</span><br><span class="line">import torchvision.transforms as transforms</span><br></pre></td></tr></table></figure>
 
 <p>超参数设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">input_size = 1</span><br><span class="line">output_size = 1</span><br><span class="line">num_epochs = 60</span><br><span class="line">learning_rate = 0.001</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># hyper-parameters</span><br><span class="line">input_size = 784</span><br><span class="line">num_classes = 10</span><br><span class="line">num_epochs = 5</span><br><span class="line">batch_size = 100</span><br><span class="line">learning_rate = 0.001</span><br></pre></td></tr></table></figure>
 
-<p>数据集生成</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Toy dataset</span></span><br><span class="line">x_train = np.array([[<span class="number">3.3</span>], [<span class="number">4.4</span>], [<span class="number">5.5</span>], [<span class="number">6.71</span>], [<span class="number">6.93</span>], [<span class="number">4.168</span>], </span><br><span class="line">                    [<span class="number">9.779</span>], [<span class="number">6.182</span>], [<span class="number">7.59</span>], [<span class="number">2.167</span>], [<span class="number">7.042</span>], </span><br><span class="line">                    [<span class="number">10.791</span>], [<span class="number">5.313</span>], [<span class="number">7.997</span>], [<span class="number">3.1</span>]], dtype=np.float32)</span><br><span class="line">y_train = np.array([[<span class="number">1.7</span>], [<span class="number">2.76</span>], [<span class="number">2.09</span>], [<span class="number">3.19</span>], [<span class="number">1.694</span>], [<span class="number">1.573</span>], </span><br><span class="line">                    [<span class="number">3.366</span>], [<span class="number">2.596</span>], [<span class="number">2.53</span>], [<span class="number">1.221</span>], [<span class="number">2.827</span>], </span><br><span class="line">                    [<span class="number">3.465</span>], [<span class="number">1.65</span>], [<span class="number">2.904</span>], [<span class="number">1.3</span>]], dtype=np.float32)</span><br></pre></td></tr></table></figure>
+<p>数据集加载</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MNIST dataset (image and labels)</span></span><br><span class="line">train_dataset = torchvision.datasets.MNIST(root=<span class="string">'../../data'</span>, <span class="comment"># 训练数据集下载的位置</span></span><br><span class="line">                                           train=<span class="literal">True</span>,</span><br><span class="line">                                           transform=transforms.ToTensor(),</span><br><span class="line">                                           download=<span class="literal">True</span>)</span><br><span class="line">test_dataset = torchvision.datasets.MNIST(root=<span class="string">'../../data'</span>, <span class="comment"># 测试数据集下载的位置</span></span><br><span class="line">                                         train=<span class="literal">False</span>,</span><br><span class="line">                                         transform=transforms.ToTensor())</span><br><span class="line"><span class="comment"># 数据加载器（input pipeline）</span></span><br><span class="line">train_loader = torch.utils.data.DataLoader(dataset=train_dataset,</span><br><span class="line">                                          batch_size=batch_size,</span><br><span class="line">                                          shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">test_loader = torch.utils.data.DataLoader(dataset=test_dataset,</span><br><span class="line">                                         batch_size=batch_size,</span><br><span class="line">                                         shuffle=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 
-<p>线性模型建立以及loss和优化器设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Linear regression model</span><br><span class="line">model = nn.Linear(input_size, output_size)</span><br><span class="line"></span><br><span class="line"># Loss and optimizer</span><br><span class="line">criterion = nn.MESLoss()</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)</span><br></pre></td></tr></table></figure>
+<p>创建逻辑回归模型，loss和优化器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = nn.Linear(input_size, num_class)</span><br><span class="line"></span><br><span class="line"># Loss and optimizer</span><br><span class="line"># nn.CrossEntropyLoss() computes softmax internally</span><br><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)</span><br></pre></td></tr></table></figure>
 
 <p>训练模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    <span class="comment"># 将numpy数组转换为torch的张量</span></span><br><span class="line">    inputs = torch.from_numpy(x_train)</span><br><span class="line">    targets = torch.from_numpy(y_train)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 前向传播</span></span><br><span class="line">    outputs = model(inputs)</span><br><span class="line">    loss = criterion(outputs, targets)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 反向传播和优化</span></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (epoch+<span class="number">1</span>) % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'EPOCH [&#123;&#125;/&#123;&#125;], Loss:&#123;:.4f&#125;'</span>.format(epoch+<span class="number">1</span>, num_epochs, loss.item()))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">total_step = len(train_loader)</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    <span class="keyword">for</span> i,(images, labels) <span class="keyword">in</span> enumerate(train_loader):</span><br><span class="line">        <span class="comment">#　reshape images to (batch_size, input_size)</span></span><br><span class="line">        images = images.reshape(<span class="number">-1</span>, <span class="number">28</span>*<span class="number">28</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 前向传播</span></span><br><span class="line">        outputs = model(images)</span><br><span class="line">        loss = criterion(outputs, labels)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 反向传播和优化</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (i+<span class="number">1</span>) % <span class="number">100</span> ==<span class="number">0</span>:</span><br><span class="line">            print(<span class="string">'Epoch [&#123;&#125;/&#123;&#125;], step [&#123;&#125;/&#123;&#125;], Loss:&#123;:.4f&#125;'</span></span><br><span class="line">                 .format(epoch+<span class="number">1</span>, num_epochs, i+<span class="number">1</span>, total_step, loss.item()))</span><br></pre></td></tr></table></figure>
 
-<p>绘制图</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">predicted = model(torch.from_numpy(x_train)).detach().numpy()</span><br><span class="line">plt.plot(x_train, y_train, &apos;ro&apos;, label=&apos;Original data&apos;)</span><br><span class="line">plt.plot(x_train, predicted, label=&apos;Fitted line&apos;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>关于：enumerate的使用</p>
+<p>enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</p>
+<p>测试模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在测试阶段，我们不需要计算梯度（为了计算效率）</span></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    correct = <span class="number">0</span></span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> images, labels <span class="keyword">in</span> test_loader:</span><br><span class="line">        images = images.reshape(<span class="number">-1</span>, <span class="number">28</span>*<span class="number">28</span>)</span><br><span class="line">        outputs = model(images)</span><br><span class="line">        _, predicted = torch.max(outputs.data, <span class="number">1</span>)</span><br><span class="line">        total += labels.size(<span class="number">0</span>)</span><br><span class="line">        correct += (predicted == labels).sum()</span><br><span class="line">     </span><br><span class="line">    print(<span class="string">'Accuracy of the model on the 10000 test images: &#123;&#125; %'</span>.format(<span class="number">100</span>*correct/total))</span><br></pre></td></tr></table></figure>
 
 <p>保存模型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(model.state_dict(), &apos;model.ckpt&apos;)</span><br></pre></td></tr></table></figure>
 
-<p>最终效果：</p>
-<img src="http://pye1oyyud.bkt.clouddn.com/Figure_1.png">
-
-<p>原文链接：<a href="https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/01-basics/linear_regression/main.py#L22-L23" target="_blank" rel="noopener">https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/01-basics/linear_regression/main.py#L22-L23</a></p>
 
       
     </div>
@@ -364,13 +355,13 @@ var _hmt = _hmt || [];
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/passages/pytorch学习教程（二）——线性回归/">pytorch学习教程（二）——线性回归</a></p>
+        <p><span>Title:</span><a href="/passages/pytorch学习教程（三）逻辑回归/">pytorch学习教程（三）逻辑回归</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
-        <p><span>Created:</span>2019-10-12, 11:40:37</p>
-        <p><span>Updated:</span>2019-10-12, 14:41:14</p>
+        <p><span>Created:</span>2019-10-12, 14:43:44</p>
+        <p><span>Updated:</span>2019-10-12, 17:46:59</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/passages/pytorch学习教程（二）——线性回归/" title="pytorch学习教程（二）——线性回归">http://yoursite.com/passages/pytorch学习教程（二）——线性回归/</a>
-            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/pytorch学习教程（二）——线性回归/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/passages/pytorch学习教程（三）逻辑回归/" title="pytorch学习教程（三）逻辑回归">http://yoursite.com/passages/pytorch学习教程（三）逻辑回归/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/pytorch学习教程（三）逻辑回归/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -383,15 +374,15 @@ var _hmt = _hmt || [];
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/passages/pytorch学习教程（三）逻辑回归/">
-                    pytorch学习教程（三）逻辑回归
+                <a href="/passages/logo缺陷检测/">
+                    python-opencv实现logo缺陷检测
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/passages/pytorch学习教程（一）——pytorch基础/">
-                    pytorch学习教程（一）——pytorch基础
+                <a href="/passages/pytorch学习教程（二）——线性回归/">
+                    pytorch学习教程（二）——线性回归
                 </a>
             </div>
         
@@ -439,7 +430,7 @@ var _hmt = _hmt || [];
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"pytorch学习教程（二）——线性回归　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"pytorch学习教程（三）逻辑回归　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -482,7 +473,7 @@ var _hmt = _hmt || [];
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/passages/pytorch学习教程（三）逻辑回归/" title="Pre: pytorch学习教程（三）逻辑回归">
+            <a href="/passages/logo缺陷检测/" title="Pre: python-opencv实现logo缺陷检测">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -490,7 +481,7 @@ var _hmt = _hmt || [];
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/passages/pytorch学习教程（一）——pytorch基础/" title="Next: pytorch学习教程（一）——pytorch基础">
+            <a href="/passages/pytorch学习教程（二）——线性回归/" title="Next: pytorch学习教程（二）——线性回归">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -512,7 +503,7 @@ var _hmt = _hmt || [];
     const btw = new BTWPlugin();
     btw.init({
 	  
-	id: "post-pytorch学习教程（二）——线性回归",
+	id: "post-pytorch学习教程（三）逻辑回归",
         blogId:'15322-1569306303362-701',
         name: 'AI算法与图像处理',
         qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
