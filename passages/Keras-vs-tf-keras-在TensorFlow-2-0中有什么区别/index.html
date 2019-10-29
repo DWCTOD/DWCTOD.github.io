@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="AI_study">
+
+
+
+<meta name="description" content="在本教程中，您将发现Keras和tf.keras之间的区别，包括TensorFlow 2.0中的新增功能。">
+<meta name="keywords" content="TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?">
+<meta property="og:url" content="http://yoursite.com/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在本教程中，您将发现Keras和tf.keras之间的区别，包括TensorFlow 2.0中的新增功能。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bLDS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bjEQ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2b7gP.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bqu8.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bHjf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bx4s.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bvNj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/29/K2bOHg.png">
+<meta property="og:updated_time" content="2019-10-29T05:01:51.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?">
+<meta name="twitter:description" content="在本教程中，您将发现Keras和tf.keras之间的区别，包括TensorFlow 2.0中的新增功能。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/10/29/K2bLDS.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别? | Hexo</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">AI_study</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/534155562@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/DWCTOD" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/wu-dong-37-11/activities" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wo/">wo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">保持客观，不轻易下结论～</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">AI_study</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">AI_study</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/534155562@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/DWCTOD" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/wu-dong-37-11/activities" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/" class="article-date">
+      <time datetime="2019-10-29T04:53:30.000Z" itemprop="datePublished">2019-10-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?
+    </h1>
+  
+
+	
+	
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/深度学习框架/">深度学习框架</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在本教程中，您将发现Keras和tf.keras之间的区别，包括TensorFlow 2.0中的新增功能。</p>
+<a id="more"></a>
+
+<h1 id="Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别"><a href="#Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别" class="headerlink" title="Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?"></a>Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?</h1><p><a href="https://www.pyimagesearch.com/2019/10/21/keras-vs-tf-keras-whats-the-difference-in-tensorflow-2-0/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2019/10/21/keras-vs-tf-keras-whats-the-difference-in-tensorflow-2-0/</a></p>
+<img src="https://s2.ax1x.com/2019/10/29/K2bLDS.png" width="400">
+
+
+
+<p>在本教程中，您将发现Keras和tf.keras之间的区别，包括TensorFlow 2.0中的新增功能。</p>
+<p>万众期待的TensorFlow 2.0于9月30日正式发布。</p>
+<p>虽然肯定是值得庆祝的时刻，<strong>但许多深度学习从业人员（例如耶利米）都在挠头：</strong></p>
+<ul>
+<li>作为Keras用户，TensorFlow 2.0版本对我意味着什么？</li>
+<li>我是否应该使用keras软件包来训练自己的神经网络？</li>
+<li>还是应该在TensorFlow 2.0中使用tf.keras子模块？</li>
+<li>作为Keras用户，我应该关注TensorFlow 2.0功能吗？</li>
+</ul>
+<p>从TensorFlow 1.x到TensorFlow 2.0的过渡至少有些艰难，至少要开始，<strong>但是有了正确的了解，您将能够轻松地进行迁移导航。</strong></p>
+<p>在本教程的其余部分中，我将讨论Keras，tf.keras和TensorFlow 2.0版本之间的相似之处，包括您应注意的功能。</p>
+<hr>
+<p>在本教程的第一部分中，我们将讨论Keras和TensorFlow之间相互交织的历史，包括他们共同的受欢迎程度如何相互滋养，彼此成长和滋养，从而使我们走向今天。</p>
+<p>然后，我将讨论为什么您应该在以后的所有深度学习项目和实验中都使用tf.keras。</p>
+<p>接下来，我将讨论“计算backend”的概念，以及TensorFlow的流行度如何使其成为Keras最流行的backend，为Keras集成到TensorFlow的tf.keras子模块中铺平道路。</p>
+<p>最后，我们将讨论您作为Keras用户应关注的一些最受欢迎的TensorFlow 2.0功能，包括：</p>
+<ul>
+<li>Sessions and eager execution</li>
+<li>Automatic differentiation</li>
+<li>Model and layer subclassing</li>
+<li>Better multi-GPU/distributed training support</li>
+</ul>
+<p>TensorFlow 2.0中包含一个完整的生态系统，其中包括TensorFlow Lite（用于移动和嵌入式设备）和TensorFlow Extended，用于开发生产机器学习管道（用于部署生产模型）。</p>
+<p>让我们开始吧！</p>
+<h3 id="Keras和TensorFlow之间的纠缠关系"><a href="#Keras和TensorFlow之间的纠缠关系" class="headerlink" title="Keras和TensorFlow之间的纠缠关系"></a>Keras和TensorFlow之间的纠缠关系</h3><img src="https://s2.ax1x.com/2019/10/29/K2bjEQ.png" width="400">
+
+<p>[^1]: Keras和TensorFlow之间有着复杂的历史。 在TensorFlow 2.0中，您应该使用tf.keras而不是单独的Keras软件包。</p>
+<p>理解Keras和TensorFlow之间复杂，纠缠的关系就像聆听两位高中情侣的爱情故事，他们开始约会，分手并最终找到了自己的路，这很长，很详尽，有时甚至矛盾。</p>
+<p>我们不会为您回忆完整的爱情故事，而是会<strong>回顾CliffsNotes</strong>：</p>
+<ul>
+<li>Keras最初是由Google AI开发人员/研究人员Francois Chollet创建和开发的。</li>
+<li>Francois于2015年3月27日承诺将Keras的第一个版本发布到他的GitHub。</li>
+<li>最初，Francois开发了Keras，以促进他自己的研究和实验。</li>
+<li>但是，随着深度学习的普及，许多开发人员，程序员和机器学习从业人员都因其易于使用的API而蜂拥而至Keras。</li>
+<li>那时，可用的深度学习库还不多，热门的库包括Torch，Theano和Caffe。<ul>
+<li>这些库的问题在于，这就像试图编写程序集/ C ++来执行您的实验一样——<strong>繁琐，耗时且效率低下</strong>。</li>
+<li><strong>另一方面，Keras非常易于使用</strong>，这使得研究人员和开发人员可以更快地迭代他们的实验。</li>
+</ul>
+</li>
+<li>为了训练您自己的自定义神经网络，<strong>Keras需要一个backend</strong>。<ul>
+<li><strong>backend是一个计算引擎</strong>——它构建网络图/拓扑，运行优化器并执行实际的数字运算。</li>
+<li><strong>要了解backend的概念，请考虑从头开始构建网站。</strong>在这里，您可以使用PHP编程语言和SQL数据库。您的SQL数据库是您的backend。您可以使用MySQL，PostgreSQL或SQL Server作为数据库。但是，用于与数据库进行交互的PHP代码不会更改（当然，前提是您使用的是某种抽象数据库层的MVC范例）。<strong>本质上，PHP并不关心正在使用哪个数据库，只要它符合PHP的规则即可。</strong></li>
+<li><strong>Keras也是如此。</strong>您可以将backend视为数据库，将Keras视为用于访问数据库的编程语言。您可以交换自己喜欢的任何backend，只要它遵守某些规则，您的代码就不必更改。</li>
+<li>因此，<strong>您可以将Keras视为一组抽象的概念，这使得执行深度学习更加容易</strong>（请注意：尽管Keras始终启用快速原型制作，但对研究人员来说不够灵活。TensorFlow2.0对此进行了更改——在稍后的内容中将对此进行详细介绍）。</li>
+</ul>
+</li>
+<li><strong>最初，Keras的默认backend是Theano</strong>，直到v1.1.0为止都是默认的。</li>
+<li>同时，<strong>Google发布了TensorFlow</strong>，这是一个用于机器学习和训练神经网络的符号数学库。<ul>
+<li>Keras开始支持TensorFlow作为backend，缓慢但可以肯定的是，TensorFlow成为最受欢迎的backend，<strong>因此从Keras v1.1.0版本开始，TensorFlow成为默认的backend。</strong></li>
+</ul>
+</li>
+<li>根据定义，一旦TensorFlow成为Keras的默认backend，<strong>TensorFlow和Keras的使用量就会一起增长</strong>——如果没有TensorFlow，就无法拥有Keras，并且如果在系统上安装了Keras，那么您还将安装TensorFlow。<ul>
+<li>同样，TensorFlow用户越来越被高级Keras API的简单性吸引。</li>
+</ul>
+</li>
+<li><strong>TensorFlow v1.10.0中引入了tf.keras子模块</strong>，这是将Keras直接集成在TensorFlow包本身中的第一步。<ul>
+<li>tf.keras软件包与您将要通过pip安装的keras软件包分开（即pip install keras）。</li>
+<li>原始的keras软件包不包含在tensorflow中以确保兼容性，因此它们都可以有机地发展。</li>
+</ul>
+</li>
+<li>但是，现在情况正在发生变化——当Google在2019年6月发布TensorFlow 2.0时，他们宣布<strong>Keras现在是TensorFlow的官方高级API</strong>，可以快速，轻松地进行模型设计和训练。</li>
+<li>随着Keras 2.3.0的发布，Francois声明：<ul>
+<li>这是Keras的第一个版本，使keras软件包与tf.keras同步</li>
+<li>这是Keras的最终版本，它将支持多个backend（例如Theano，CNTK等）。</li>
+<li><strong>最重要的是，所有深度学习从业人员都应将其代码切换到TensorFlow 2.0和tf.keras软件包。</strong></li>
+<li>原始的keras软件包仍将收到错误修复，但是继续前进，您应该使用tf.keras。</li>
+</ul>
+</li>
+</ul>
+<p>如您所知，Keras和TensorFlow之间的历史悠久，复杂且交织在一起。</p>
+<p><strong>但是，作为Keras用户，对您来说最重要的收获是，您应该在将来的项目中使用TensorFlow 2.0和tf.keras。</strong></p>
+<h3 id="在以后的所有项目中开始使用tf-keras"><a href="#在以后的所有项目中开始使用tf-keras" class="headerlink" title="在以后的所有项目中开始使用tf.keras"></a>在以后的所有项目中开始使用tf.keras</h3><img src="https://s2.ax1x.com/2019/10/29/K2b7gP.png" width="400">
+
+<p>[^2]: TensorFlow 2.0中的Keras和tf.keras有什么区别？</p>
+<p>在2019年9月17日，Keras v2.3.0正式发布-在发行版Francois Chollet（Keras的创建者和首席维护者）中指出：</p>
+<blockquote>
+<p>Keras v2.3.0是使keras与tf.keras同步的第一个版本, 这将是最后一个支持TensorFlow以外的backend（即Theano，CNTK等）的主要版本。</p>
+<p>最重要的是，<strong>深度学习从业人员应该开始转向TensorFlow 2.0和tf.keras软件包</strong></p>
+</blockquote>
+<p>对于大多数项目，这就像从以下位置更改导入行一样简单：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from keras... import ...</span><br></pre></td></tr></table></figure>
+
+<p>要使用tensorflow导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from tensorflow.keras... import ...</span><br></pre></td></tr></table></figure>
+
+<p>如果您使用自定义训练循环或会话（Session），则必须更新代码才能使用新的GradientTape功能，但是总的来说，更新代码相当容易。</p>
+<p>为了帮助您（自动）将代码从keras更新为tf.keras，Google发布了一个名为tf_upgrade_v2脚本，该脚本顾名思义可以分析您的代码并报告需要更新的行——该脚本甚至可以执行为您进行升级的过程。</p>
+<blockquote>
+<p>您可以参考此处以了解有关自动将代码更新为TensorFlow 2.0的更多信息</p>
+<p><a href="https://www.tensorflow.org/guide/upgrade" target="_blank" rel="noopener">https://www.tensorflow.org/guide/upgrade</a></p>
+</blockquote>
+<h3 id="Keras的计算“backend”"><a href="#Keras的计算“backend”" class="headerlink" title="Keras的计算“backend”"></a>Keras的计算“backend”</h3><img src="https://s2.ax1x.com/2019/10/29/K2bqu8.png" width="400">
+
+<p>[^3]: Keras支持哪些计算backend？ 通过tf.keras在TensorFlow中直接使用Keras是什么意思？</p>
+<p>正如我在本文前面提到的那样，Keras依赖于计算backend的概念。</p>
+<p>计算backend在构建模型图，数值计算等方面执行所有“繁重的工作”。</p>
+<p><strong>然后Keras作为abstraction坐在此计算引擎的顶部</strong>，使深度学习开发人员/从业人员更容易实现和训练他们的模型。</p>
+<p>最初，Keras支持Theano作为其首选的计算backend——后来又支持其他backend，包括CNTK和mxnet等。</p>
+<p><strong>但是，到目前为止，最受欢迎的backend是TensorFlow，最终成为Keras的默认计算backend。</strong></p>
+<p>随着越来越多的TensorFlow用户开始使用Keras的易于使用的高级API，越来越多的TensorFlow开发人员不得不认真考虑将Keras项目纳入TensorFlow中名为tf.keras的单独模块中。</p>
+<p>TensorFlow v1.10是TensorFlow的第一个版本，在tf.keras中包含了一个keras分支。</p>
+<p><strong>现在已经发布了TensorFlow 2.0，keras和tf.keras都是同步的</strong>，这意味着keras和tf.keras仍然是单独的项目; 但是，<strong>开发人员应该开始使用tf.keras，因为keras软件包仅支持错误修复。</strong></p>
+<p>引用Keras的创建者和维护者Francois Chollet：</p>
+<blockquote>
+<p>这也是多后端Keras的最后一个主要版本。 展望未来，我们建议用户考虑在TensorFlow 2.0中将其Keras代码切换为tf.keras。</p>
+<p>它实现了相同的Keras 2.3.0 API（因此切换应该像更改Keras导入语句一样容易），但是它对TensorFlow用户具有许多优势，例如支持eager execution, distribution, TPU training, and generally far better integration 在低层TensorFlow和高层概念（如“层”和“模型”）之间。</p>
+<p>它也得到更好的维护。</p>
+</blockquote>
+<p>如果您同时是Keras和TensorFlow用户，则应考虑将代码切换到TensorFlow 2.0和tf.keras。</p>
+<h3 id="TensorFlow-2-0中Sessions-and-Eager-Execution"><a href="#TensorFlow-2-0中Sessions-and-Eager-Execution" class="headerlink" title="TensorFlow 2.0中Sessions and Eager Execution"></a>TensorFlow 2.0中Sessions and Eager Execution</h3><img src="https://s2.ax1x.com/2019/10/29/K2bHjf.png" width="400">
+
+<p>[^4]: Eager execution是一种处理动态计算图的Python方式。 TensorFlow 2.0支持Eager execution（PyTorch也是如此）。 您可以利用TensorFlow 2.0和tf.keras的Eager execution和Sessions</p>
+<p>使用tf.keras中的Keras API的TensorFlow 1.10+用户将熟悉创建会话以训练其模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">with tf.Session() as session:</span><br><span class="line">	session.run(tf.global_variables_initializer())</span><br><span class="line">	session.run(tf.tables_initializer())</span><br><span class="line">	model.fit(X_train, y_train, validation_data=(X_valid, y_valid),</span><br><span class="line">		epochs=10, batch_size=64)</span><br></pre></td></tr></table></figure>
+
+<p>创建Session对象并要求提前构建整个模型图有点麻烦，因此TensorFlow 2.0引入了Eager Execution的概念，从而将代码简化为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.fit(X_train, y_train, validation_data=(X_valid, y_valid),</span><br><span class="line">	epochs=10, batch_size=64)</span><br></pre></td></tr></table></figure>
+
+<p>Eager Execution 的好处是不必构建整个模型图。</p>
+<p>取而代之的是，将立即评估操作，从而更轻松地开始构建模型（以及调试模型）。</p>
+<p>有关Eager Execution的更多详细信息，包括如何与TensorFlow 2.0一起使用，请参阅本文。</p>
+<blockquote>
+<p><a href="https://medium.com/coding-blocks/eager-execution-in-tensorflow-a-more-pythonic-way-of-building-models-e461810618c8" target="_blank" rel="noopener">https://medium.com/coding-blocks/eager-execution-in-tensorflow-a-more-pythonic-way-of-building-models-e461810618c8</a></p>
+</blockquote>
+<p>而且，如果您想比较“Eager Execution”与“Sessions”及其对训练模型速度的影响，请参阅此页面。</p>
+<blockquote>
+<p><a href="https://github.com/sayakpaul/TF-2.0-Hacks/tree/master/Speed%20comparison%20between%20TF%201.x%20and%20TF%202.0" target="_blank" rel="noopener">https://github.com/sayakpaul/TF-2.0-Hacks/tree/master/Speed%20comparison%20between%20TF%201.x%20and%20TF%202.0</a></p>
+</blockquote>
+<p><strong>使用TensorFlow 2.0的Automatic differentiation（自动微分）和GradientTape（梯度带）</strong></p>
+<img src="https://s2.ax1x.com/2019/10/29/K2bx4s.png" width="400">
+
+<p>[^5]: TensorFlow 2.0如何更好地处理自定义网络层或损失函数？ 答案在于自动微分和梯度带</p>
+<p>如果您是需要实施自定义网络层或损失函数的研究人员，那么您可能不喜欢TensorFlow 1.x（理应如此）。</p>
+<p>至少可以说，TensorFlow 1.x的自定义实现很笨拙——还有很多不足之处。</p>
+<p>随着TensorFlow 2.0版本的开始变化——现在实现您自己的自定义损失要容易得多。</p>
+<p>变得更容易的一种方法是通过<strong>自动微分</strong>和GradientTape实施。</p>
+<p>要利用GradientTape，我们要做的就是实现我们的模型架构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Define our model architecture</span><br><span class="line">model = tf.keras.Sequential([</span><br><span class="line">    tf.keras.layers.Dropout(rate=0.2, input_shape=X.shape[1:]),</span><br><span class="line">    tf.keras.layers.Dense(units=64, activation=&apos;relu&apos;),</span><br><span class="line">    tf.keras.layers.Dropout(rate=0.2),</span><br><span class="line">    tf.keras.layers.Dense(units=1, activation=&apos;sigmoid&apos;)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>定义我们的损失函数和优化器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Define loss and optimizer</span><br><span class="line">loss_func = tf.keras.losses.BinaryCrossentropy()</span><br><span class="line">optimizer = tf.keras.optimizers.Adam()</span><br></pre></td></tr></table></figure>
+
+<p>创建负责执行单个批处理更新的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def train_loop(features, labels):</span><br><span class="line">    # Define the GradientTape context</span><br><span class="line">    with tf.GradientTape() as tape:</span><br><span class="line">        # Get the probabilities</span><br><span class="line">        predictions = model(features)</span><br><span class="line">        # Calculate the loss</span><br><span class="line">        loss = loss_func(labels, predictions)</span><br><span class="line">    # Get the gradients</span><br><span class="line">    gradients = tape.gradient(loss, model.trainable_variables)</span><br><span class="line">    # Update the weights</span><br><span class="line">    optimizer.apply_gradients(zip(gradients, model.trainable_variables))</span><br><span class="line">    return loss</span><br></pre></td></tr></table></figure>
+
+<p>然后开始训练模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Train the model</span><br><span class="line">def train_model():</span><br><span class="line">    start = time.time()</span><br><span class="line">    for epoch in range(10):</span><br><span class="line">        for step, (x, y) in enumerate(dataset):</span><br><span class="line">            loss = train_loop(x, y)</span><br><span class="line">            print(&apos;Epoch %d: last batch loss = %.4f&apos; % (epoch, float(loss)))</span><br><span class="line">    print(&quot;It took &#123;&#125; seconds&quot;.format(time.time() - start))</span><br><span class="line"> </span><br><span class="line"># Initiate training</span><br><span class="line">train_model()</span><br></pre></td></tr></table></figure>
+
+<p>GradientTape为我们在后台处理差异化处理，使处理自定义损失和网络层变得容易得多。</p>
+<p>说到自定义层和模型实现，一定要参考下一节。</p>
+<h3 id="TensorFlow-2-0中的模型和网络层子类化（Model-and-layer-subclassing-）"><a href="#TensorFlow-2-0中的模型和网络层子类化（Model-and-layer-subclassing-）" class="headerlink" title="TensorFlow 2.0中的模型和网络层子类化（Model and layer subclassing ）"></a>TensorFlow 2.0中的模型和网络层子类化（Model and layer subclassing ）</h3><p><strong>TensorFlow 2.0和tf.keras为我们提供了三种单独的方法来实现我们自己的自定义模型：</strong></p>
+<ol>
+<li>Sequential</li>
+<li>Function</li>
+<li>Subclassing</li>
+</ol>
+<p>Sequential和Function范式都已经在Keras中存在很长时间了，但是对于许多深度学习从业者来说，Subclassing功能仍然是未知的。</p>
+<p><strong>我将在下周针对这三种方法进行专门的教程，但是暂时</strong>，让我们看一下如何使用（1）TensorFlow 2.0，（2）tf基于开创性的LeNet架构实现简单的CNN。 keras，以及（3）模型subclassing 功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class LeNet(tf.keras.Model):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(LeNet, self).__init__()</span><br><span class="line">        self.conv2d_1 = tf.keras.layers.Conv2D(filters=6, </span><br><span class="line">                           kernel_size=(3, 3), activation=&apos;relu&apos;, </span><br><span class="line">                           input_shape=(32,32,1))</span><br><span class="line">        self.average_pool = tf.keras.layers.AveragePooling2D()</span><br><span class="line">        self.conv2d_2 = tf.keras.layers.Conv2D(filters=16, </span><br><span class="line">                           kernel_size=(3, 3), activation=&apos;relu&apos;)</span><br><span class="line">        self.flatten = tf.keras.layers.Flatten()</span><br><span class="line">        self.fc_1 = tf.keras.layers.Dense(120, activation=&apos;relu&apos;)</span><br><span class="line">        self.fc_2 = tf.keras.layers.Dense(84, activation=&apos;relu&apos;)</span><br><span class="line">        self.out = tf.keras.layers.Dense(10, activation=&apos;softmax&apos;)</span><br><span class="line">        </span><br><span class="line">    def call(self, input):</span><br><span class="line">        x = self.conv2d_1(input)</span><br><span class="line">        x = self.average_pool(x)</span><br><span class="line">        x = self.conv2d_2(x)</span><br><span class="line">        x = self.average_pool(x)</span><br><span class="line">        x = self.flatten(x)</span><br><span class="line">        x = self.fc_2(self.fc_1(x))</span><br><span class="line">        return self.out(x)</span><br><span class="line">    </span><br><span class="line">lenet = LeNet()</span><br></pre></td></tr></table></figure>
+
+<p>注意LeNet类是Model的子类(subclass )。</p>
+<p>LeNet的构造函数（即init）定义了模型内部的每个单独层。</p>
+<p>然后，call方法将执行前向传递，<strong>使您可以根据需要自定义前向传递。</strong></p>
+<p>使用模型子类化(model subclassing )的好处是您的模型：</p>
+<ul>
+<li>变得完全可定制(fully-customizable)。</li>
+<li>使您能够实施和利用自己的自定义损失实现。</li>
+</ul>
+<p>而且，由于您的体系结构继承了Model类，因此您仍然可以调用.fit（）、. compile（）和.evaluate（）之类的方法，从而维护易于使用（且熟悉）的Keras API。</p>
+<p>如果您想了解有关LeNet的更多信息，可以参考下面这篇文章。</p>
+<blockquote>
+<p><a href="https://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/</a></p>
+</blockquote>
+<h3 id="TensorFlow-2-0引入了更好的多GPU和分布式训练支持"><a href="#TensorFlow-2-0引入了更好的多GPU和分布式训练支持" class="headerlink" title="TensorFlow 2.0引入了更好的多GPU和分布式训练支持"></a>TensorFlow 2.0引入了更好的多GPU和分布式训练支持</h3><img src="https://s2.ax1x.com/2019/10/29/K2bvNj.png" width="400">
+
+<p>[^6]: TensorFlow 2.0是否经过多个GPU训练更好？ 是的</p>
+<p>TensorFlow 2.0和tf.keras通过其MirroredStrategy提供更好的多GPU和分布式训练。</p>
+<blockquote>
+<p><a href="https://www.tensorflow.org/guide/distributed_training#mirroredstrategy" target="_blank" rel="noopener">https://www.tensorflow.org/guide/distributed_training#mirroredstrategy</a></p>
+</blockquote>
+<p>引用TensorFlow 2.0文档：“ MirroredStrategy支持在一台机器上的多个GPU上的同步分布式训练”。</p>
+<p>如果要使用多台计算机（每台计算机可能具有多个GPU），则应查看MultiWorkerMirroredStrategy。</p>
+<blockquote>
+<p><a href="https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy" target="_blank" rel="noopener">https://www.tensorflow.org/guide/distributed_training#multiworkermirroredstrategy</a></p>
+</blockquote>
+<p>或者，如果您使用Google的云服务器进行训练，请查看TPUStrategy。</p>
+<blockquote>
+<p><a href="https://www.tensorflow.org/guide/distributed_training#tpustrategy" target="_blank" rel="noopener">https://www.tensorflow.org/guide/distributed_training#tpustrategy</a></p>
+</blockquote>
+<p>不过，现在，假设您位于一台具有多个GPU的机器上，并且想要确保所有GPU都用于训练。</p>
+<p>您可以先创建MirroredStrategy来完成此操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strategy = tf.distribute.MirroredStrategy()</span><br><span class="line">print (&apos;Number of devices: &#123;&#125;&apos;.format(strategy.num_replicas_in_sync))</span><br></pre></td></tr></table></figure>
+
+<p>然后，您需要声明您的模型架构，并在 strategy 范围内对其进行编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Call the distribution scope context manager</span><br><span class="line">with strategy.scope():</span><br><span class="line">    # Define a model to fit the above data</span><br><span class="line">    model = tf.keras.Sequential([</span><br><span class="line">        tf.keras.layers.Dropout(rate=0.2, input_shape=X.shape[1:]),</span><br><span class="line">        tf.keras.layers.Dense(units=64, activation=&apos;relu&apos;),</span><br><span class="line">        tf.keras.layers.Dropout(rate=0.2),</span><br><span class="line">        tf.keras.layers.Dense(units=1, activation=&apos;sigmoid&apos;)</span><br><span class="line">    ])</span><br><span class="line">    </span><br><span class="line">    # Compile the model</span><br><span class="line">    model.compile(loss=&apos;binary_crossentropy&apos;,</span><br><span class="line">                optimizer=&apos;adam&apos;,</span><br><span class="line">                metrics=[&apos;accuracy&apos;])</span><br></pre></td></tr></table></figure>
+
+<p>从那里，您可以调用.fit训练模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Train the model</span><br><span class="line">model.fit(X, y, epochs=5)</span><br></pre></td></tr></table></figure>
+
+<p>如果您的机器具有多个GPU，TensorFlow将为您处理多GPU训练。</p>
+<h3 id="TensorFlow-2-0是一个生态系统，包括TF-2-0，TF-Lite，TFX，量化（quantization）和部署（deployment）"><a href="#TensorFlow-2-0是一个生态系统，包括TF-2-0，TF-Lite，TFX，量化（quantization）和部署（deployment）" class="headerlink" title="TensorFlow 2.0是一个生态系统，包括TF 2.0，TF Lite，TFX，量化（quantization）和部署（deployment）"></a>TensorFlow 2.0是一个生态系统，包括TF 2.0，TF Lite，TFX，量化（quantization）和部署（deployment）</h3><img src="https://s2.ax1x.com/2019/10/29/K2bOHg.png" width="400">
+
+<p>[^7]: TensorFlow 2.0生态系统中有哪些新功能？ 我应该单独使用Keras还是应该使用tf.keras？</p>
+<p>TensorFlow 2.0不仅仅是一个计算引擎和一个用于训练神经网络的深度学习库，它还具有更多功能。</p>
+<p>借助TensorFlow Lite（TF Lite），我们可以训练，优化和量化旨在在资源受限的设备上运行的模型，例如智能手机和其他嵌入式设备（例如Raspberry Pi，Google Coral等）。</p>
+<blockquote>
+<p><a href="https://www.tensorflow.org/lite/" target="_blank" rel="noopener">https://www.tensorflow.org/lite/</a></p>
+</blockquote>
+<p>或者，如果您需要将模型部署到生产环境，则可以使用TensorFlow Extended（TFX），这是用于模型部署的端到端平台。</p>
+<p>研究和实验完成后，您可以利用TFX为生产准备模型，并使用Google的生态系统扩展模型。</p>
+<p>借助TensorFlow 2.0，我们真正开始看到在研究，实验，模型准备/量化和部署到生产之间更好，更高效的桥梁。</p>
+<p>我对TensorFlow 2.0的发布及其对深度学习社区的影响感到非常兴奋。</p>
+<p><strong>Credits</strong></p>
+<p>本文中的所有代码示例均来自TensorFlow 2.0的官方示例。 有关更多详细信息，请确保参考Francois Chollet提供的完整代码示例。</p>
+<blockquote>
+<p><a href="https://www.tensorflow.org/tutorials" target="_blank" rel="noopener">https://www.tensorflow.org/tutorials</a></p>
+<p><a href="https://colab.research.google.com/drive/17u-pRZJnKN0gO5XZmq8n5A2bKGrfKEUg" target="_blank" rel="noopener">https://colab.research.google.com/drive/17u-pRZJnKN0gO5XZmq8n5A2bKGrfKEUg</a></p>
+</blockquote>
+<p>此外，一定要查阅Sayak Paul的TensorFlow 2.0的十个重要更新，这有助于启发今天的博客文章。</p>
+<blockquote>
+<p><a href="https://www.datacamp.com/community/tutorials/ten-important-updates-tensorflow" target="_blank" rel="noopener">https://www.datacamp.com/community/tutorials/ten-important-updates-tensorflow</a></p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在本教程中，您了解了Keras，tf.keras和TensorFlow 2.0。</p>
+<p><strong>首先重要的一点是，使用keras软件包的深度学习从业人员应该开始在TensorFlow 2.0中使用tf.keras。</strong></p>
+<p>您不仅会享受TensorFlow 2.0的更快的速度和优化，而且还将获得新的功能更新-keras软件包的最新版本（v2.3.0）将成为支持多个后端和功能更新的最新版本。展望未来，keras软件包将仅收到错误修复。</p>
+<p>您应该在未来的项目中认真考虑迁移到tf.keras和TensorFlow 2.0。</p>
+<p><strong>第二个要点是TensorFlow 2.0不仅仅是GPU加速的深度学习库。</strong></p>
+<p>您不仅可以使用TensorFlow 2.0和tf.keras训练自己的模型，而且现在可以：</p>
+<ul>
+<li>采取这些模型，并使用TensorFlow Lite（TF Lite）为移动/嵌入式部署做好准备。</li>
+<li>使用TensorFlow Extended（TF Extended）将模型部署到生产中。</li>
+</ul>
+<p>从我的角度来看，我已经开始将原始的keras代码移植到tf.keras。我建议您开始做同样的事情。</p>
+<p>希望您喜欢今天的教程-我很快就会回来使用新的TensorFlow 2.0和tf.keras教程。</p>
+<blockquote>
+<p>翻译原文：<a href="https://www.pyimagesearch.com/2019/10/21/keras-vs-tf-keras-whats-the-difference-in-tensorflow-2-0/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2019/10/21/keras-vs-tf-keras-whats-the-difference-in-tensorflow-2-0/</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/">Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
+        <p><span>Created:</span>2019-10-29, 12:53:30</p>
+        <p><span>Updated:</span>2019-10-29, 13:01:51</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/" title="Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?">http://yoursite.com/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/passages/logo缺陷检测/">
+                    python-opencv实现logo缺陷检测
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别"><span class="toc-number">1.</span> <span class="toc-text">Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Keras和TensorFlow之间的纠缠关系"><span class="toc-number">1.0.1.</span> <span class="toc-text">Keras和TensorFlow之间的纠缠关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在以后的所有项目中开始使用tf-keras"><span class="toc-number">1.0.2.</span> <span class="toc-text">在以后的所有项目中开始使用tf.keras</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keras的计算“backend”"><span class="toc-number">1.0.3.</span> <span class="toc-text">Keras的计算“backend”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TensorFlow-2-0中Sessions-and-Eager-Execution"><span class="toc-number">1.0.4.</span> <span class="toc-text">TensorFlow 2.0中Sessions and Eager Execution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TensorFlow-2-0中的模型和网络层子类化（Model-and-layer-subclassing-）"><span class="toc-number">1.0.5.</span> <span class="toc-text">TensorFlow 2.0中的模型和网络层子类化（Model and layer subclassing ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TensorFlow-2-0引入了更好的多GPU和分布式训练支持"><span class="toc-number">1.0.6.</span> <span class="toc-text">TensorFlow 2.0引入了更好的多GPU和分布式训练支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TensorFlow-2-0是一个生态系统，包括TF-2-0，TF-Lite，TFX，量化（quantization）和部署（deployment）"><span class="toc-number">1.0.7.</span> <span class="toc-text">TensorFlow 2.0是一个生态系统，包括TF 2.0，TF Lite，TFX，量化（quantization）和部署（deployment）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.0.8.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="livere" id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjgxNC8yMzMxNQ==">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/passages/logo缺陷检测/" title="Next: python-opencv实现logo缺陷检测">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/passages/Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别/">Keras vs. tf.keras:  在TensorFlow 2.0中有什么区别?</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/logo缺陷检测/">python-opencv实现logo缺陷检测</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（三）逻辑回归/">pytorch学习教程（三）逻辑回归</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（二）——线性回归/">pytorch学习教程（二）——线性回归</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/pytorch学习教程（一）——pytorch基础/">pytorch学习教程（一）——pytorch基础</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/opencv资源汇总/">opencv资源汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/深度学习用于异常检测/">深度学习用于异常检测</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/轮廓形状检测/">边缘检测，框出物体的轮廓（使用opencv-python）</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/不同色彩空间的转换/">不同色彩空间的转换</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/">Hexo Yelee主题侧边栏社交图标中的github图标不显示</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/30-helpful-python-snippets/">30个极简python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/passages/image_stitch/">图片拼接技术</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    //const btw = new BTWPlugin();
+    btw.init({
+	  
+	id: "post-Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别",
+        blogId:'15322-1569306303362-701',
+        name: 'AI算法与图像处理',
+        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 AI_study
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+<script type="text/javascript" src="/js/love.js"></script>
+
+</script>
+
+</script>
+<script type="text/javascript" src="/js/click.js">
+</script>
+
+
+	
+  </div>
+</body>
+</html>
