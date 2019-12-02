@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wo/">wo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wo/">wo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
                     </div>
                 </section>
                 
@@ -275,6 +275,312 @@ var _hmt = _hmt || [];
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-leetcode69：x的平方根" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/passages/leetcode69：x的平方根/" class="article-date">
+      <time datetime="2019-11-30T04:35:00.000Z" itemprop="datePublished">2019-11-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/passages/leetcode69：x的平方根/">leetcode69：x的平方根</a>
+    </h1>
+  
+
+	
+	
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="leetcode-69题-x的平方根"><a href="#leetcode-69题-x的平方根" class="headerlink" title="leetcode:69题 x的平方根"></a>leetcode:69题 x的平方根</h3><p>题目描述：</p>
+<p>实现 <code>int sqrt(int x)</code> 函数。</p>
+<p>计算并返回 <em>x</em> 的平方根，其中 <em>x</em> 是非负整数。</p>
+<p>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 4</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: 8</span><br><span class="line">输出: 2</span><br><span class="line">说明: 8 的平方根是 2.82842..., </span><br><span class="line">     由于返回类型是整数，小数部分将被舍去。</span><br></pre></td></tr></table></figure>
+
+<p> 作者：liweiwei1419<br>链接：<a href="https://leetcode-cn.com/problems/sqrtx/solution/er-fen-cha-zhao-niu-dun-fa-python-dai-ma-by-liw" target="_blank" rel="noopener">https://leetcode-cn.com/problems/sqrtx/solution/er-fen-cha-zhao-niu-dun-fa-python-dai-ma-by-liw</a></p>
+<p>解题思路：</p>
+<p>一、二分法</p>
+<p>思路分析：</p>
+<p>二分查找法应用于搜索平方根的思想很简单，其实就是“猜”，但是是有策略的“猜”，用“排除法”在有限的区间里，一次排除一半的区间元素，最后只剩下一个数，这个数就是题目要求的向下取整的平方根整数。</p>
+<p>一个数的平方根肯定不会超过它自身，不过直觉还告诉我们，一个数的平方根最多不会超过它的一般。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mySqrt</span><span class="params">(self, x: int)</span> -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> x == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left = <span class="number">1</span></span><br><span class="line">        right = x//<span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> left&lt;right:</span><br><span class="line">            mid = (left + right+<span class="number">1</span>)&gt;&gt;<span class="number">1</span> </span><br><span class="line">            <span class="keyword">if</span> (mid * mid) &gt; x:</span><br><span class="line">                right = mid - <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid</span><br><span class="line">        <span class="keyword">return</span> left</span><br></pre></td></tr></table></figure>
+
+<p>二、牛顿法</p>
+<p>使用牛顿法可以得到一个正实数的算术平方根，因为题目中说“结果只保留整数部分”，因此，我们把使用牛顿法得到的浮点数转换为整数即可。</p>
+<p>这里给出牛顿法的思想：</p>
+<p>在迭代过程中，以直线代替曲线，用一阶泰勒展式（即在当前点的切线）代替原曲线，求直线与 xx 轴的交点，重复这个过程直到收敛。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line"></span><br><span class="line">    def mySqrt(self, x):</span><br><span class="line">        if x &lt; 0:</span><br><span class="line">            raise Exception(&apos;不能输入负数&apos;)</span><br><span class="line">        if x == 0:</span><br><span class="line">            return 0</span><br><span class="line">        # 起始的时候在 1 ，这可以比较随意设置</span><br><span class="line">        cur = 1</span><br><span class="line">        while True:</span><br><span class="line">            pre = cur</span><br><span class="line">            cur = (cur + x / cur) / 2</span><br><span class="line">            if abs(cur - pre) &lt; 1e-6:</span><br><span class="line">                return int(cur)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    //const btw = new BTWPlugin();
+    btw.init({
+	  
+	id: "post-leetcode69：x的平方根",
+        blogId:'15322-1569306303362-701',
+        name: 'AI算法与图像处理',
+        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  
+    <article id="post-pytorch学习教程（五）——双向递归神经网络" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/passages/pytorch学习教程（五）——双向递归神经网络/" class="article-date">
+      <time datetime="2019-11-03T14:50:41.000Z" itemprop="datePublished">2019-11-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/passages/pytorch学习教程（五）——双向递归神经网络/">双向递归神经网络</a>
+    </h1>
+  
+
+	
+	
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>本文介绍了如何使用pytorch实现双向递归神经网络</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/深度学习框架/">深度学习框架</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/">pytorch</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/passages/pytorch学习教程（五）——双向递归神经网络/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    //const btw = new BTWPlugin();
+    btw.init({
+	  
+	id: "post-pytorch学习教程（五）——双向递归神经网络",
+        blogId:'15322-1569306303362-701',
+        name: 'AI算法与图像处理',
+        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  
+    <article id="post-pytorch学习教程（四）前馈神经网络" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/passages/pytorch学习教程（四）前馈神经网络/" class="article-date">
+      <time datetime="2019-10-29T07:56:53.000Z" itemprop="datePublished">2019-10-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/passages/pytorch学习教程（四）前馈神经网络/">pytorch学习教程（四）前馈神经网络</a>
+    </h1>
+  
+
+	
+	
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>本文介绍了如何使用pytorch实现前馈神经网络</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/深度学习框架/">深度学习框架</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/">pytorch</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/passages/pytorch学习教程（四）前馈神经网络/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    //const btw = new BTWPlugin();
+    btw.init({
+	  
+	id: "post-pytorch学习教程（四）前馈神经网络",
+        blogId:'15322-1569306303362-701',
+        name: 'AI算法与图像处理',
+        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
   
     <article id="post-Keras-vs-tf-keras-在TensorFlow-2-0中有什么区别" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -926,287 +1232,6 @@ var _hmt = _hmt || [];
     btw.init({
 	  
 	id: "post-深度学习用于异常检测",
-        blogId:'15322-1569306303362-701',
-        name: 'AI算法与图像处理',
-        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
-        keyword: 'vip',
-    });
-</script>
-
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-
-  
-    <article id="post-轮廓形状检测" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/passages/轮廓形状检测/" class="article-date">
-      <time datetime="2019-09-29T07:13:56.000Z" itemprop="datePublished">2019-09-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/passages/轮廓形状检测/">边缘检测，框出物体的轮廓（使用opencv-python）</a>
-    </h1>
-  
-
-	
-	
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p><a href="https://zhuanlan.zhihu.com/p/38739563" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38739563</a></p>
-<p>轮廓检测是一个比较重要的任务，通过检测图片或视频帧中的物体的轮廓，结合其他操作可以实现很多任务需求。例如通过检测出物体的轮廓，进而计算面积，计算周长等等。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/passages/轮廓形状检测/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
-<script>
-    //const btw = new BTWPlugin();
-    btw.init({
-	  
-	id: "post-轮廓形状检测",
-        blogId:'15322-1569306303362-701',
-        name: 'AI算法与图像处理',
-        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
-        keyword: 'vip',
-    });
-</script>
-
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-
-  
-    <article id="post-不同色彩空间的转换" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/passages/不同色彩空间的转换/" class="article-date">
-      <time datetime="2019-09-29T07:04:30.000Z" itemprop="datePublished">2019-09-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/passages/不同色彩空间的转换/">不同色彩空间的转换</a>
-    </h1>
-  
-
-	
-	
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>计算机视觉中有三种常用的色彩空间：灰度、BGR以及HSV（Hue, Saturation, Value）</p>
-<ul>
-<li><input disabled type="checkbox"> 灰度色彩空间是通过去除彩色信息来将其转换成灰阶，灰度色彩空间对中间处理特别有效，比如人脸检测</li>
-<li><input disabled type="checkbox"> BGR，即蓝-绿-红色彩空间，每一个像素点都有一个三元数组来表示，分别代表地蓝、绿、红三种颜色。</li>
-<li><input disabled type="checkbox"> HSV，H（Hue）是色调，S（Saturation）是饱和度，V（Value）表示黑暗的成都（或光谱另一端的明亮程度）。</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Image-Processing/">Image Processing</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
-<script>
-    //const btw = new BTWPlugin();
-    btw.init({
-	  
-	id: "post-不同色彩空间的转换",
-        blogId:'15322-1569306303362-701',
-        name: 'AI算法与图像处理',
-        qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
-        keyword: 'vip',
-    });
-</script>
-
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?99d7a33631587fc39d03a240f3d365e8";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/passages/hello-world/" class="article-date">
-      <time datetime="2019-09-29T05:53:49.038Z" itemprop="datePublished">2019-09-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/passages/hello-world/">Hello World</a>
-    </h1>
-  
-
-	
-	
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wo/">wo</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/passages/hello-world/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
-<script>
-    //const btw = new BTWPlugin();
-    btw.init({
-	  
-	id: "post-hello-world",
         blogId:'15322-1569306303362-701',
         name: 'AI算法与图像处理',
         qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
