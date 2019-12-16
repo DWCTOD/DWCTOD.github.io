@@ -27,20 +27,18 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="最近自己用hexo+github搭建了一个个人网站：https://dwctod.github.io/ 但是出现了一些问题，比如这里github图标无法显示了 按照网友的提示：https://blog.csdn.net/youshaoduo/article/details/84824828">
-<meta name="keywords" content="踩坑总结">
+<meta name="description" content="在使用python时，经常会遇到super。对于学过c语言的小伙伴，很陌生也很好奇，super函数到底有什么用。">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo Yelee主题侧边栏社交图标中的github图标不显示">
-<meta property="og:url" content="http://yoursite.com/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/index.html">
+<meta property="og:title" content="踩坑总结：python中super()函数的用法理解">
+<meta property="og:url" content="http://yoursite.com/passages/python中super-函数的用法理解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="最近自己用hexo+github搭建了一个个人网站：https://dwctod.github.io/ 但是出现了一些问题，比如这里github图标无法显示了 按照网友的提示：https://blog.csdn.net/youshaoduo/article/details/84824828">
+<meta property="og:description" content="在使用python时，经常会遇到super。对于学过c语言的小伙伴，很陌生也很好奇，super函数到底有什么用。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg">
-<meta property="og:updated_time" content="2019-09-30T05:54:00.204Z">
+<meta property="og:updated_time" content="2019-12-02T02:39:20.489Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo Yelee主题侧边栏社交图标中的github图标不显示">
-<meta name="twitter:description" content="最近自己用hexo+github搭建了一个个人网站：https://dwctod.github.io/ 但是出现了一些问题，比如这里github图标无法显示了 按照网友的提示：https://blog.csdn.net/youshaoduo/article/details/84824828">
-<meta name="twitter:image" content="http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg">
+<meta name="twitter:title" content="踩坑总结：python中super()函数的用法理解">
+<meta name="twitter:description" content="在使用python时，经常会遇到super。对于学过c语言的小伙伴，很陌生也很好奇，super函数到底有什么用。">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -72,7 +70,7 @@ var _hmt = _hmt || [];
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Hexo Yelee主题侧边栏社交图标中的github图标不显示 | Hexo</title>
+<title>踩坑总结：python中super()函数的用法理解 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -276,11 +274,11 @@ var _hmt = _hmt || [];
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-Hexo-Yelee主题侧边栏社交图标中的github图标不显示" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-python中super-函数的用法理解" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/" class="article-date">
-      <time datetime="2019-09-27T06:47:11.000Z" itemprop="datePublished">2019-09-27</time>
+      <a href="/passages/python中super-函数的用法理解/" class="article-date">
+      <time datetime="2019-12-02T02:29:51.000Z" itemprop="datePublished">2019-12-02</time>
 </a>
 
 
@@ -295,7 +293,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo Yelee主题侧边栏社交图标中的github图标不显示
+      踩坑总结：python中super()函数的用法理解
     </h1>
   
 
@@ -308,7 +306,7 @@ var _hmt = _hmt || [];
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/踩坑总结/">踩坑总结</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -318,28 +316,29 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近自己用hexo+github搭建了一个个人网站：<a href="https://dwctod.github.io/" target="_blank" rel="noopener">https://dwctod.github.io/</a></p>
-<p>但是出现了一些问题，比如这里github图标无法显示了</p>
-<p>按照网友的提示：<a href="https://blog.csdn.net/youshaoduo/article/details/84824828" target="_blank" rel="noopener">https://blog.csdn.net/youshaoduo/article/details/84824828</a></p>
+        <p>在使用python时，经常会遇到super。对于学过c语言的小伙伴，很陌生也很好奇，super函数到底有什么用。</p>
 <a id="more"></a>
 
-<h3 id="他的思路："><a href="#他的思路：" class="headerlink" title="他的思路："></a>他的思路：</h3><p>（1）从<a href="http://www.iconfont.cn/search/index?searchType=icon&q=github" target="_blank" rel="noopener">这里下载图片</a>，并将图片存放在YourBolgPath/themes/yelee/source/img/下</p>
-<p>（2）修改YourBolgPath/themes/yelee/source/css/_partial/customise/social-icon.styl的img-logo中加入GitHub black 75（GitHub是图片名，black是背景色，75是透明度，自己看着改吧）</p>
-<p>（3）删除下面代码块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.GitHub</span><br><span class="line">    background url(//cdn.bootcss.com/logos/0.2.0/github-octocat.svg) no-repeat white</span><br><span class="line">    background-size 90%</span><br><span class="line">    background-position 50% 100%</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.runoob.com/python/python-func-super.html" target="_blank" rel="noopener">https://www.runoob.com/python/python-func-super.html</a></p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><strong>super()</strong> 函数是用于调用父类(超类)的一个方法。</p>
+<p>super 是用来解决多重继承问题的，直接用类名调用父类方法在使用单继承的时候没问题，但是如果使用多继承，会涉及到查找顺序（MRO）、重复调用（钻石继承）等种种问题。</p>
+<p>MRO 就是类的方法解析顺序表, 其实也就是继承父类方法时的顺序表。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>以下是 super() 方法的语法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">super(type[, object-or-type])</span><br></pre></td></tr></table></figure>
 
-<h3 id="存在的问题："><a href="#存在的问题：" class="headerlink" title="存在的问题："></a>存在的问题：</h3><p>（1）无效，同时GitHub black 75（这里75并不是透明度，而是显示的比例）</p>
-<p>（2）我对YourBolgPath/themes/yelee/source/img/底下的图片进行操作，例如将“知乎”.png的图片删除，仍然能正常显示，因此显然内部的原理并不是这样子的。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>但是，我还是想到办法解决了，因为正如原作者所说的，github的图片消失了，所以无法显示，因此我在<a href="http://www.iconfont.cn/search/index?searchType=icon&q=github" target="_blank" rel="noopener">这里下载图片</a>，然后将下载好的图片上传到图床上【这里使用七牛】，然后生成外链，替换掉上面的代码块中url后面的即可。</p>
-<p>因此我已经将图片上传到图床，理论上，大家只要将这部分修改成下面即可</p>
-<p>（1）找到YourBolgPath/themes/yelee/source/css/_partial/customise/social-icon.styl，打开</p>
-<p>（2）修改和替换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.GitHub</span><br><span class="line">    background url(http://pye1oyyud.bkt.clouddn.com/github2.svg) no-repeat white</span><br><span class="line">    background-size 80%</span><br><span class="line">    background-position 50% 100%</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>type – 类。</li>
+<li>object-or-type – 类，一般是 self</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>以下展示了使用 super 函数的实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line">class FooParent(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.parent = &apos;I\&apos;m the parent.&apos;</span><br><span class="line">        print (&apos;Parent&apos;)</span><br><span class="line">    </span><br><span class="line">    def bar(self,message):</span><br><span class="line">        print (&quot;%s from Parent&quot; % message)</span><br><span class="line"> </span><br><span class="line">class FooChild(FooParent):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        # super(FooChild,self) 首先找到 FooChild 的父类（就是类 FooParent），然后把类 FooChild 的对象转换为类 FooParent 的对象</span><br><span class="line">        super(FooChild,self).__init__()    </span><br><span class="line">        print (&apos;Child&apos;)</span><br><span class="line">        </span><br><span class="line">    def bar(self,message):</span><br><span class="line">        super(FooChild, self).bar(message)</span><br><span class="line">        print (&apos;Child bar fuction&apos;)</span><br><span class="line">        print (self.parent)</span><br><span class="line"> </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    fooChild = FooChild()</span><br><span class="line">    fooChild.bar(&apos;HelloWorld&apos;)</span><br></pre></td></tr></table></figure>
 
-<p>备注：url括号中的内容进行修改哦</p>
-<p>最终效果可以到我的网站查看哦，欢迎留言和交流～<a href="https://dwctod.github.io/" target="_blank" rel="noopener">https://dwctod.github.io/</a></p>
-<p><strong><div align="center"> <font face="“微软黑体”" color="blue" size="16">更多优质内容请关注：</font></div></strong></p>
-<div align="center"><img src="http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg" align="right"></div>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Parent</span><br><span class="line">Child</span><br><span class="line">HelloWorld from Parent</span><br><span class="line">Child bar fuction</span><br><span class="line">I&apos;m the parent.</span><br></pre></td></tr></table></figure>
+
+<p>个人理解：</p>
+<p>从上面的实例结合说明，可以看到，super函数首先找到 FooChild 的父类（就是类 FooParent），然后把类 FooChild 的对象转换为类 FooParent 的对象。例如super(FooChild, self).bar(message)，则直接就调用了父类中的bar函数并输出结果。而其他没有调用super的部分，依然使用fooChild自身函数功能</p>
+
       
     </div>
     
@@ -347,13 +346,13 @@ var _hmt = _hmt || [];
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/">Hexo Yelee主题侧边栏社交图标中的github图标不显示</a></p>
+        <p><span>Title:</span><a href="/passages/python中super-函数的用法理解/">踩坑总结：python中super()函数的用法理解</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
-        <p><span>Created:</span>2019-09-27, 14:47:11</p>
-        <p><span>Updated:</span>2019-09-30, 13:54:00</p>
+        <p><span>Created:</span>2019-12-02, 10:29:51</p>
+        <p><span>Updated:</span>2019-12-02, 10:39:20</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/" title="Hexo Yelee主题侧边栏社交图标中的github图标不显示">http://yoursite.com/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/</a>
-            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/Hexo-Yelee主题侧边栏社交图标中的github图标不显示/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/passages/python中super-函数的用法理解/" title="踩坑总结：python中super()函数的用法理解">http://yoursite.com/passages/python中super-函数的用法理解/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/python中super-函数的用法理解/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -366,15 +365,15 @@ var _hmt = _hmt || [];
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/passages/hello-world/">
-                    Hello World
+                <a href="/passages/踩坑总结：assert的用法/">
+                    踩坑总结：assert的用法
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/passages/30-helpful-python-snippets/">
-                    30个极简python技巧
+                <a href="/passages/leetcode70：爬楼梯/">
+                    leetcode70:爬楼梯
                 </a>
             </div>
         
@@ -386,7 +385,7 @@ var _hmt = _hmt || [];
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#他的思路："><span class="toc-number">1.</span> <span class="toc-text">他的思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存在的问题："><span class="toc-number">2.</span> <span class="toc-text">存在的问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-number">1.2.</span> <span class="toc-text">参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">2.</span> <span class="toc-text">实例</span></a></li></ol>
         
     </div>
     <style>
@@ -422,7 +421,7 @@ var _hmt = _hmt || [];
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Hexo Yelee主题侧边栏社交图标中的github图标不显示　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"踩坑总结：python中super()函数的用法理解　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -465,7 +464,7 @@ var _hmt = _hmt || [];
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/passages/hello-world/" title="Pre: Hello World">
+            <a href="/passages/踩坑总结：assert的用法/" title="Pre: 踩坑总结：assert的用法">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -473,7 +472,7 @@ var _hmt = _hmt || [];
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/passages/30-helpful-python-snippets/" title="Next: 30个极简python技巧">
+            <a href="/passages/leetcode70：爬楼梯/" title="Next: leetcode70:爬楼梯">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -495,7 +494,7 @@ var _hmt = _hmt || [];
     //const btw = new BTWPlugin();
     btw.init({
 	  
-	id: "post-Hexo-Yelee主题侧边栏社交图标中的github图标不显示",
+	id: "post-python中super-函数的用法理解",
         blogId:'15322-1569306303362-701',
         name: 'AI算法与图像处理',
         qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
