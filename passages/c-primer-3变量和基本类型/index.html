@@ -27,15 +27,18 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="keywords" content="opencv">
+<meta name="description" content="变量和基本类型">
+<meta name="keywords" content="c++ study">
 <meta property="og:type" content="article">
-<meta property="og:title" content="opencv资源汇总">
-<meta property="og:url" content="http://yoursite.com/passages/opencv资源汇总/index.html">
+<meta property="og:title" content="c++-primer-3变量和基本类型">
+<meta property="og:url" content="http://yoursite.com/passages/c-primer-3变量和基本类型/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="变量和基本类型">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-08T03:32:30.431Z">
+<meta property="og:updated_time" content="2020-03-29T16:36:41.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="opencv资源汇总">
+<meta name="twitter:title" content="c++-primer-3变量和基本类型">
+<meta name="twitter:description" content="变量和基本类型">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -67,7 +70,7 @@ var _hmt = _hmt || [];
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>opencv资源汇总 | Hexo</title>
+<title>c++-primer-3变量和基本类型 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -271,11 +274,11 @@ var _hmt = _hmt || [];
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-opencv资源汇总" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-c-primer-3变量和基本类型" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/passages/opencv资源汇总/" class="article-date">
-      <time datetime="2019-10-08T03:31:46.000Z" itemprop="datePublished">2019-10-08</time>
+      <a href="/passages/c-primer-3变量和基本类型/" class="article-date">
+      <time datetime="2020-03-29T15:52:12.000Z" itemprop="datePublished">2020-03-29</time>
 </a>
 
 
@@ -290,7 +293,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      opencv资源汇总
+      c++-primer-3变量和基本类型
     </h1>
   
 
@@ -300,14 +303,10 @@ var _hmt = _hmt || [];
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/opencv资源/">opencv资源</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c-study/">c++ study</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -317,7 +316,30 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>变量和基本类型</p>
+<a id="more"></a>
+
+<p>练习2.23：给定指针p，你能知道它是否指向了一个合法的对象吗？如果能，叙述判断的思路；如果不能，也请说明原因。</p>
+<p>不能，因为信息量不足。</p>
+<p>练习2.24：在下面这段代码中为什么p合法而lp非法？</p>
+<p>int i = 42;        void *p = &i;        long *lp = &i;</p>
+<p>因为类型是void<em>的指针可以指向任何类型的对象，而long</em>的指针只能指向long类型的对象。</p>
+<p>练习2.25：说明下列变量的类型和值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int* ip, i, &amp;r = i; (b) int i, *ip = 0; (c) int ip, ip2;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>(a) ip是一个指向int的指针，i是一个int型变量，r是一个指向i的引用。如果在块内定义它们，ip和i的值都是未定义的，否则是0。</p>
+<p>(b) i是一个int型变量，ip是一个指向int的指针。如果在块内定义它们，i的值是未定义的，否则是0。ip的值是0。</p>
+<p>(c) ip是一个指向int的指针，ip2是一个int型变量。如果在块内定义它们，ip和ip2的值都是未定义的，否则是0。</p>
+<p>练习2.26：下面哪些句子是合法的？如果有不合法的句子，请说明为什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(a) const int buf;		(b) int cnt = 0;</span><br><span class="line">(c) const int sz = cnt;	(d) ++cnt; ++sz;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>(a) 不合法，必须初始化一个const变量。<br>(b) 合法。<br>(c) 合法。<br>(d) 不合法，不能修改一个const变量（sz）。</p>
+<p>练习2.27：下面哪些初始化是合法的？请说明原因。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(a) int i = -1, &amp;r = 0;			(b) int *const p2 = &amp;i2;</span><br><span class="line">(c) const int i = -1, &amp;r = 0;	(d) const int *const p3 = &amp;i2;</span><br><span class="line">(e) const int *p1 = &amp;i2;		(f) const int &amp;const r2;</span><br><span class="line">(g) const int i2 = i, &amp;r = i;</span><br><span class="line">/*</span><br><span class="line">(a) 非法，r是一个普通引用，不能绑定到字面量。</span><br><span class="line">(b) 合法，但前提是i2不是const int。</span><br><span class="line">(c) 合法。r是一个常量引用，可以绑定到字面量。</span><br><span class="line">(d) 合法。</span><br><span class="line">(e) 合法。</span><br><span class="line">(f) 非法。r2是一个引用，必须初始化，且没有const引用，只有指向常量的引用。</span><br><span class="line">(g) 合法。</span><br><span class="line">*/</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//const int i2 = 0;</span><br><span class="line">	int i2 = 0;</span><br><span class="line">	int *const p2 = &amp;i2;</span><br><span class="line">	*p2 = 1; // just use p2 to ignore warning</span><br><span class="line"></span><br><span class="line">	//const int &amp;const r2;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -325,13 +347,13 @@ var _hmt = _hmt || [];
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/passages/opencv资源汇总/">opencv资源汇总</a></p>
+        <p><span>Title:</span><a href="/passages/c-primer-3变量和基本类型/">c++-primer-3变量和基本类型</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
-        <p><span>Created:</span>2019-10-08, 11:31:46</p>
-        <p><span>Updated:</span>2019-10-08, 11:32:30</p>
+        <p><span>Created:</span>2020-03-29, 23:52:12</p>
+        <p><span>Updated:</span>2020-03-30, 00:36:41</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/passages/opencv资源汇总/" title="opencv资源汇总">http://yoursite.com/passages/opencv资源汇总/</a>
-            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/opencv资源汇总/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/passages/c-primer-3变量和基本类型/" title="c++-primer-3变量和基本类型">http://yoursite.com/passages/c-primer-3变量和基本类型/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/c-primer-3变量和基本类型/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -343,16 +365,10 @@ var _hmt = _hmt || [];
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/passages/pytorch学习教程（一）——pytorch基础/">
-                    pytorch学习教程（一）——pytorch基础
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/passages/深度学习用于异常检测/">
-                    深度学习用于异常检测
+                <a href="/passages/c++-primer-1注释、for、if、while和IO库的使用/">
+                    c++_primer（1）注释、for、if、while和IO库的使用
                 </a>
             </div>
         
@@ -400,7 +416,7 @@ var _hmt = _hmt || [];
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"opencv资源汇总　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"c++-primer-3变量和基本类型　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -443,15 +459,13 @@ var _hmt = _hmt || [];
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/passages/pytorch学习教程（一）——pytorch基础/" title="Pre: pytorch学习教程（一）——pytorch基础">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/passages/深度学习用于异常检测/" title="Next: 深度学习用于异常检测">
+            <a href="/passages/c++-primer-1注释、for、if、while和IO库的使用/" title="Next: c++_primer（1）注释、for、if、while和IO库的使用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -473,7 +487,7 @@ var _hmt = _hmt || [];
     //const btw = new BTWPlugin();
     btw.init({
 	  
-	id: "post-opencv资源汇总",
+	id: "post-c-primer-3变量和基本类型",
         blogId:'15322-1569306303362-701',
         name: 'AI算法与图像处理',
         qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',

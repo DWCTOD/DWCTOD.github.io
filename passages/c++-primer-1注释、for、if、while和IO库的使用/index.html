@@ -27,15 +27,18 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="keywords" content="opencv">
+<meta name="description" content="注释、for、if、while和IO库的使用">
+<meta name="keywords" content="c++ study">
 <meta property="og:type" content="article">
-<meta property="og:title" content="opencv资源汇总">
-<meta property="og:url" content="http://yoursite.com/passages/opencv资源汇总/index.html">
+<meta property="og:title" content="c++_primer（1）注释、for、if、while和IO库的使用">
+<meta property="og:url" content="http://yoursite.com/passages/c++-primer-1注释、for、if、while和IO库的使用/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="注释、for、if、while和IO库的使用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-08T03:32:30.431Z">
+<meta property="og:updated_time" content="2020-03-28T15:14:17.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="opencv资源汇总">
+<meta name="twitter:title" content="c++_primer（1）注释、for、if、while和IO库的使用">
+<meta name="twitter:description" content="注释、for、if、while和IO库的使用">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -67,7 +70,7 @@ var _hmt = _hmt || [];
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>opencv资源汇总 | Hexo</title>
+<title>c++_primer（1）注释、for、if、while和IO库的使用 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -271,11 +274,11 @@ var _hmt = _hmt || [];
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-opencv资源汇总" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-c++-primer-1注释、for、if、while和IO库的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/passages/opencv资源汇总/" class="article-date">
-      <time datetime="2019-10-08T03:31:46.000Z" itemprop="datePublished">2019-10-08</time>
+      <a href="/passages/c++-primer-1注释、for、if、while和IO库的使用/" class="article-date">
+      <time datetime="2020-03-28T14:16:15.000Z" itemprop="datePublished">2020-03-28</time>
 </a>
 
 
@@ -290,7 +293,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      opencv资源汇总
+      c++_primer（1）注释、for、if、while和IO库的使用
     </h1>
   
 
@@ -300,14 +303,10 @@ var _hmt = _hmt || [];
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/opencv资源/">opencv资源</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c-study/">c++ study</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -317,7 +316,37 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>注释、for、if、while和IO库的使用</p>
+<a id="more"></a>
+
+<p><strong>1、C++中注释的使用</strong></p>
+<p>注释的类型有两种</p>
+<p>一种是：//，代表注释行，注释一行或//之后的一行内容</p>
+<p>另一种是：/**/注释块，可以注释多行，与最近的进行配对。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// example: C++中的注释使用（p8）</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 简单主函数：</span><br><span class="line"> * 读取两个数，求它们的和</span><br><span class="line"> */</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	// 提示用户输入两个数</span><br><span class="line">	std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	int a = 0, b = 0;	// 保存读入的输入数据的变量</span><br><span class="line">	std::cin &gt;&gt; a &gt;&gt; b;	// 读取输入数据</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; &quot;The sum is: &quot; &lt;&lt; a + b &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、for语句的使用</strong></p>
+<p>for可以实现迭代计算，主要用于执行次数已知的情况。while用于条件循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// example: for语句（p11）</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int sum = 0;</span><br><span class="line"></span><br><span class="line">	// 从1加到10</span><br><span class="line">	for (int val = 1; val &lt;= 10; ++val)</span><br><span class="line">		sum += val;</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、if语句的使用</strong></p>
+<p>实现统计每个值连续出现了多少次</p>
+<p>思路：</p>
+<p>1、输入一个值，记录值</p>
+<p>2、后续的数与第一个数对比，相同则计数+1，不同这输出次数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// example: if语句（p15）</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">// 统计输入中每个值连续出现了多少次</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	// currVal是我们正在统计的数；我们将读入的新值存入val</span><br><span class="line">	int currVal = 0, val = 0;</span><br><span class="line"></span><br><span class="line">	if (std::cin &gt;&gt; currVal) &#123;</span><br><span class="line">		int cnt = 1;	// 保存正在处理的当前值的个数</span><br><span class="line">		while (std::cin &gt;&gt; val) &#123;	// 读取剩余的数</span><br><span class="line">			if (val == currVal)		// 如果值相同，将cnt加1，否则打印前一个值的个数</span><br><span class="line">				++cnt;</span><br><span class="line">			else &#123;</span><br><span class="line">				std::cout &lt;&lt; currVal &lt;&lt; &quot; occurs &quot; &lt;&lt; cnt &lt;&lt; &quot; times&quot; &lt;&lt; std::endl;</span><br><span class="line">				currVal = val;	// 记住新值</span><br><span class="line">				cnt = 1;		// 重置计算器</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// 记住打印文件最后一个值的个数</span><br><span class="line">		std::cout &lt;&lt; currVal &lt;&lt; &quot; occurs &quot; &lt;&lt; cnt &lt;&lt; &quot; times&quot; &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、使用IO库</strong></p>
+<p>iostream库</p>
+<p>输入：std::cin  后接 &gt;&gt; 变量</p>
+<p>输出：std::cout 后接 &lt;&lt; 输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;</span><br><span class="line">	int v1 = 0, v2 = 0;</span><br><span class="line">	std::cin &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">	std::cout &lt;&lt; &quot;The sum of &quot; &lt;&lt; v1 &lt;&lt; &quot; and &quot; &lt;&lt; v2 &lt;&lt; &quot; is &quot;</span><br><span class="line">			  &lt;&lt; v1 + v2 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、while的使用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int sum = 0, val = 1;</span><br><span class="line"></span><br><span class="line">	// 只要val的值小于等于10，while循环就会持续执行</span><br><span class="line">	while (val &lt;= 10) &#123;</span><br><span class="line">		sum += val;		// 将sum + val赋予sum</span><br><span class="line">		++val;	// 将val加1</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/demon90s/CppStudy/tree/master/codes/CppPrimer" target="_blank" rel="noopener">https://github.com/demon90s/CppStudy/tree/master/codes/CppPrimer</a></p>
+
       
     </div>
     
@@ -325,13 +354,13 @@ var _hmt = _hmt || [];
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/passages/opencv资源汇总/">opencv资源汇总</a></p>
+        <p><span>Title:</span><a href="/passages/c++-primer-1注释、for、if、while和IO库的使用/">c++_primer（1）注释、for、if、while和IO库的使用</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">AI_study</a></p>
-        <p><span>Created:</span>2019-10-08, 11:31:46</p>
-        <p><span>Updated:</span>2019-10-08, 11:32:30</p>
+        <p><span>Created:</span>2020-03-28, 22:16:15</p>
+        <p><span>Updated:</span>2020-03-28, 23:14:17</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/passages/opencv资源汇总/" title="opencv资源汇总">http://yoursite.com/passages/opencv资源汇总/</a>
-            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/opencv资源汇总/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/passages/c++-primer-1注释、for、if、while和IO库的使用/" title="c++_primer（1）注释、for、if、while和IO库的使用">http://yoursite.com/passages/c++-primer-1注释、for、if、while和IO库的使用/</a>
+            <span class="copy-path" data-clipboard-text="From http://yoursite.com/passages/c++-primer-1注释、for、if、while和IO库的使用/　　By AI_study" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -344,15 +373,15 @@ var _hmt = _hmt || [];
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/passages/pytorch学习教程（一）——pytorch基础/">
-                    pytorch学习教程（一）——pytorch基础
+                <a href="/passages/c-primer-3变量和基本类型/">
+                    c++-primer-3变量和基本类型
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/passages/深度学习用于异常检测/">
-                    深度学习用于异常检测
+                <a href="/passages/c-学习笔记（3）注释和while的使用/">
+                    c++学习笔记（3）注释和while的使用
                 </a>
             </div>
         
@@ -400,7 +429,7 @@ var _hmt = _hmt || [];
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"opencv资源汇总　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"c++_primer（1）注释、for、if、while和IO库的使用　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -443,7 +472,7 @@ var _hmt = _hmt || [];
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/passages/pytorch学习教程（一）——pytorch基础/" title="Pre: pytorch学习教程（一）——pytorch基础">
+            <a href="/passages/c-primer-3变量和基本类型/" title="Pre: c++-primer-3变量和基本类型">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -451,7 +480,7 @@ var _hmt = _hmt || [];
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/passages/深度学习用于异常检测/" title="Next: 深度学习用于异常检测">
+            <a href="/passages/c-学习笔记（3）注释和while的使用/" title="Next: c++学习笔记（3）注释和while的使用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -473,7 +502,7 @@ var _hmt = _hmt || [];
     //const btw = new BTWPlugin();
     btw.init({
 	  
-	id: "post-opencv资源汇总",
+	id: "post-c++-primer-1注释、for、if、while和IO库的使用",
         blogId:'15322-1569306303362-701',
         name: 'AI算法与图像处理',
         qrcode: 'http://pye1oyyud.bkt.clouddn.com/qrcode_for_gh_cf77d20d7eb8_258.jpg',
